@@ -1,0 +1,607 @@
+/* Базовые стили как у Moudon */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: #333;
+    background: #fff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Верхняя панель с акцией */
+.top-bar {
+    background: #000;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 12px;
+    position: relative;
+}
+
+.top-bar .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-top-bar {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+}
+
+/* Основная шапка */
+.main-header {
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.main-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    height: 40px;
+    width: auto;
+}
+
+/* Навигация */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-link:hover {
+    color: #b8860b;
+}
+
+/* Выпадающее меню */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 30px;
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    min-width: 600px;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: grid;
+}
+
+.dropdown-column h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.dropdown-column a {
+    display: block;
+    color: #666;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.dropdown-column a:hover {
+    color: #b8860b;
+}
+
+/* Иконки в шапке */
+.header-actions {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.action-icon {
+    color: #333;
+    font-size: 16px;
+    text-decoration: none;
+    position: relative;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #b8860b;
+    color: white;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+    width: 25px;
+    height: 1px;
+    background: #333;
+    display: block;
+}
+
+/* Слайдер */
+.hero-slider {
+    position: relative;
+    height: 90vh;
+    min-height: 700px;
+    overflow: hidden;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.slide-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.slide-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.5rem;
+    font-weight: 300;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.slide-subtitle {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    color: #fff;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+}
+
+.cta-button:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* Навигация слайдера */
+.slider-nav {
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.slider-prev, .slider-next {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.5);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.slider-prev:hover, .slider-next:hover {
+    background: rgba(255,255,255,0.4);
+}
+
+.slider-dots {
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.dot.active {
+    background: #fff;
+}
+
+/* Секция "О нас" */
+.about-section {
+    padding: 100px 0;
+    background: #fff;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    line-height: 1.2;
+}
+
+.about-description p {
+    margin-bottom: 25px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #666;
+}
+
+.highlight-text {
+    font-size: 1.5rem;
+    font-style: italic;
+    margin-top: 40px;
+    color: #333;
+}
+
+/* Коллекции */
+.collections-section {
+    padding: 80px 0;
+    background: #f9f9f9;
+}
+
+.section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 60px;
+    letter-spacing: 2px;
+}
+
+.collections-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.collection-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.collection-image {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s;
+}
+
+.collection-item:hover .collection-image {
+    transform: scale(1.05);
+}
+
+.collection-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: rgba(255,255,255,0.9);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collection-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.collection-link {
+    color: #333;
+    text-decoration: none;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.collection-link:hover {
+    color: #b8860b;
+}
+
+/* Секция с историей */
+.story-section {
+    padding: 100px 0;
+}
+
+.story-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.story-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    margin-bottom: 30px;
+    line-height: 1.2;
+}
+
+.story-text p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: #666;
+}
+
+.story-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 35px;
+    border: 1px solid #333;
+    color: #333;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    transition: all 0.3s;
+}
+
+.story-button:hover {
+    background: #333;
+    color: #fff;
+}
+
+.story-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Подвал */
+.main-footer {
+    background: #000;
+    color: #fff;
+    padding: 60px 0 30px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 60px;
+    margin-bottom: 50px;
+}
+
+.footer-links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.footer-column h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.footer-column a {
+    display: block;
+    color: #999;
+    text-decoration: none;
+    margin-bottom: 12px;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.footer-column a:hover {
+    color: #fff;
+}
+
+.footer-column p {
+    color: #999;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.subscribe-form input {
+    width: 100%;
+    padding: 12px;
+    background: #222;
+    border: 1px solid #333;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.subscribe-form button {
+    width: 100%;
+    padding: 12px;
+    background: #fff;
+    color: #000;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.subscribe-form button:hover {
+    background: #eee;
+}
+
+.footer-bottom {
+    border-top: 1px solid #333;
+    padding-top: 30px;
+    text-align: center;
+    color: #999;
+    font-size: 14px;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .collections-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .slide-title {
+        font-size: 3.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .main-nav, .header-actions {
+        display: none;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+        position: fixed;
+        top: 100px;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        padding: 20px;
+        z-index: 1000;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .dropdown-menu {
+        position: static;
+        display: none;
+        grid-template-columns: 1fr;
+        min-width: auto;
+        box-shadow: none;
+        padding: 15px 0;
+    }
+    
+    .hero-slider {
+        height: 70vh;
+        min-height: 500px;
+    }
+    
+    .slide-title {
+        font-size: 2.5rem;
+    }
+    
+    .story-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .collections-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .slide-title {
+        font-size: 2rem;
+    }
+    
+    .about-text h2 {
+        font-size: 2.2rem;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+    }
+}
