@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог о парфюмерии | Дом Парфюмерии - советы, новинки, история ароматов</title>
+    <meta name="description" content="Блог о парфюмерии от экспертов Дома Парфюмерии. Советы по выбору духов, история ароматов, новинки парфюмерного мира.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Блог о парфюмерии | Дом Парфюмерии">
+    <meta property="og:description" content="Экспертные статьи о парфюмерии, советы по выбору и использованию духов">
+    <meta property="og:image" content="images/blog-hero.jpg">
+    <meta property="og:type" content="website">
+    
+    <!-- Шрифты -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/blog.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    
+    <!-- Smooth Scroll полифил для Safari -->
+    <script src="https://unpkg.com/smoothscroll-polyfill/dist/smoothscroll.min.js"></script>
+</head>
+<body>
+    <!-- Верхняя панель -->
+    <div class="top-bar">
+        <div class="container">
+            <p>Подпишитесь на рассылку и получите скидку 15% на первую покупку</p>
+            <button class="close-top-bar" aria-label="Закрыть">&times;</button>
+        </div>
+    </div>
+
+    <!-- Основная шапка -->
+    <header class="main-header">
+        <div class="container">
+            <!-- Логотип -->
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Дом Парфюмерии" width="150">
+                </a>
+            </div>
+
+            <!-- Навигация с выпадающим меню для блога -->
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="menu-item dropdown">
+                        <a href="#" class="nav-link">Каталог <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>По типу</h4>
+                                <a href="catalog-women.html">Женские духи</a>
+                                <a href="catalog-men.html">Мужские духи</a>
+                                <a href="catalog-unisex.html">Унисекс</a>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>По брендам</h4>
+                                <a href="catalog-niche.html">Нишевые</a>
+                                <a href="catalog-arabic.html">Арабские</a>
+                                <a href="catalog-oils.html">На разлив</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="about.html" class="nav-link">О нас</a></li>
+                    <li class="menu-item dropdown">
+                        <a href="blog.html" class="nav-link active">Блог <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>Новинки</h4>
+                                <a href="#new-arrivals">Новые поступления</a>
+                                <a href="#trends">Тренды сезона</a>
+                                <a href="#exclusive">Эксклюзивные коллекции</a>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>Категории</h4>
+                                <a href="#guides">Гайды по выбору</a>
+                                <a href="#tips">Советы экспертов</a>
+                                <a href="#stories">Истории ароматов</a>
+                                <a href="#behind-scenes">Закулисье парфюмерии</a>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>Популярное</h4>
+                                <a href="#popular">Самое читаемое</a>
+                                <a href="#archive">Архив статей</a>
+                                <a href="blog-newsletter.html">Подписаться на новости</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                    <li><a href="wholesale.html" class="nav-link">Оптовикам</a></li>
+                </ul>
+            </nav>
+
+            <!-- Иконки -->
+            <div class="header-actions">
+                <button class="action-icon search-toggle" aria-label="Поиск">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="account.html" class="action-icon user-icon" aria-label="Личный кабинет">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="cart.html" class="action-icon cart-icon" aria-label="Корзина">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <!-- Поисковая строка -->
+            <div class="search-container">
+                <form class="search-form">
+                    <input type="text" placeholder="Поиск статей..." class="search-input">
+                    <button type="submit" class="search-submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button type="button" class="search-close">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Мобильное меню -->
+            <button class="mobile-menu-toggle" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Герой-секция блога -->
+    <section class="blog-hero">
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="page-title">Блог о парфюмерии</h1>
+                <p class="page-subtitle">Экспертные статьи, советы и истории из мира ароматов</p>
+                <div class="hero-tags">
+                    <a href="#guides" class="tag">Гайды</a>
+                    <a href="#tips" class="tag">Советы</a>
+                    <a href="#stories" class="tag">Истории</a>
+                    <a href="#new" class="tag">Новинки</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Основное содержание -->
+    <main class="blog-content">
+        <!-- Приветственный текст -->
+        <section class="blog-intro">
+            <div class="container">
+                <div class="intro-content">
+                    <h2>Добро пожаловать в мир ароматов</h2>
+                    <p>Здесь мы делимся знаниями, секретами и вдохновением из мира парфюмерии. От основ выбора духов до тонкостей парфюмерного искусства — каждая статья поможет вам лучше понять и полюбить мир ароматов.</p>
+                    <div class="intro-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Статей</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">10+</span>
+                            <span class="stat-label">Экспертов</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">1000+</span>
+                            <span class="stat-label">Читателей</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Популярные статьи -->
+        <section class="featured-posts">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Популярные статьи</h2>
+                    <p class="section-subtitle">Самое интересное от наших экспертов</p>
+                </div>
+                <div class="featured-grid">
+                    <!-- Статья 1 -->
+                    <article class="featured-card large" data-aos="fade-up">
+                        <div class="post-image">
+                            <img src="images/blog-layering.jpg" alt="Слоение духов" loading="lazy">
+                            <span class="post-category">Советы</span>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-date"><i class="far fa-calendar"></i> 15 января 2026</span>
+                            <h3 class="post-title">Искусство слоения: как создавать уникальные ароматические композиции</h3>
+                            <p class="post-excerpt">Узнайте, как правильно сочетать разные духи, чтобы создать свой уникальный scent. Практическое руководство по слоению нот от наших парфюмеров.</p>
+                            <div class="post-meta">
+                                <span class="author"><i class="far fa-user"></i> Анна Парфюмерова</span>
+                                <span class="read-time"><i class="far fa-clock"></i> 5 мин чтения</span>
+                            </div>
+                            <a href="article-layering.html" class="read-more">Читать статью <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Статья 2 -->
+                    <article class="featured-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="post-image">
+                            <img src="images/blog-notes.jpg" alt="Пирамида нот" loading="lazy">
+                            <span class="post-category">Обучение</span>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-date"><i class="far fa-calendar"></i> 10 января 2026</span>
+                            <h3 class="post-title">Что такое пирамида нот и как её читать?</h3>
+                            <p class="post-excerpt">Полное руководство по пониманию структуры аромата. Узнайте, что такое верхние, средние и базовые ноты и как они раскрываются на коже.</p>
+                            <div class="post-meta">
+                                <span class="author"><i class="far fa-user"></i> Дмитрий Сомелье</span>
+                                <span class="read-time"><i class="far fa-clock"></i> 4 мин чтения</span>
+                            </div>
+                            <a href="article-notes.html" class="read-more">Читать статью <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Статья 3 -->
+                    <article class="featured-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="post-image">
+                            <img src="images/blog-longevity.jpg" alt="Долговечность духов" loading="lazy">
+                            <span class="post-category">Советы</span>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-date"><i class="far fa-calendar"></i> 5 января 2026</span>
+                            <h3 class="post-title">7 способов сделать аромат более стойким</h3>
+                            <p class="post-excerpt">Простые и эффективные техники, которые помогут вашему любимому аромату держаться весь день. От подготовки кожи до правильного хранения.</p>
+                            <div class="post-meta">
+                                <span class="author"><i class="far fa-user"></i> Мария Ароматова</span>
+                                <span class="read-time"><i class="far fa-clock"></i> 6 мин чтения</span>
+                            </div>
+                            <a href="article-longevity.html" class="read-more">Читать статью <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Категории статей -->
+        <section class="categories-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Категории статей</h2>
+                    <p class="section-subtitle">Выберите интересующую вас тему</p>
+                </div>
+                <div class="categories-grid">
+                    <a href="#guides" class="category-card" data-aos="zoom-in">
+                        <div class="category-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h3>Гайды по выбору</h3>
+                        <p>Как подобрать идеальный аромат для любого случая</p>
+                        <span class="category-count">12 статей</span>
+                    </a>
+                    <a href="#tips" class="category-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="category-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Советы экспертов</h3>
+                        <p>Профессиональные секреты от парфюмеров</p>
+                        <span class="category-count">18 статей</span>
+                    </a>
+                    <a href="#stories" class="category-card" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="category-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <h3>Истории ароматов</h3>
+                        <p>Увлекательные истории создания легендарных духов</p>
+                        <span class="category-count">15 статей</span>
+                    </a>
+                    <a href="#behind-scenes" class="category-card" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="category-icon">
+                            <i class="fas fa-theater-masks"></i>
+                        </div>
+                        <h3>Закулисье</h3>
+                        <p>Как создаются духи: от идеи до флакона</p>
+                        <span class="category-count">8 статей</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Все статьи -->
+        <section class="all-posts" id="posts">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Все статьи</h2>
+                    <div class="filter-controls">
+                        <button class="filter-btn active" data-filter="all">Все</button>
+                        <button class="filter-btn" data-filter="guides">Гайды</button>
+                        <button class="filter-btn" data-filter="tips">Советы</button>
+                        <button class="filter-btn" data-filter="stories">Истории</button>
+                        <button class="filter-btn" data-filter="new">Новинки</button>
+                    </div>
+                </div>
+                <div class="posts-grid">
+                    <!-- Статья 4 -->
+                    <article class="post-card" data-category="guides" data-aos="fade-up">
+                        <div class="post-image">
+                            <img src="images/blog-choose.jpg" alt="Выбор духов" loading="lazy">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Гайды</span>
+                            <h3 class="post-title">Как выбрать свой первый нишевый аромат</h3>
+                            <p class="post-excerpt">Пошаговое руководство для тех, кто только начинает знакомство с миром нишевой парфюмерии.</p>
+                            <div class="post-meta">
+                                <span class="post-date">12 января 2026</span>
+                                <span class="read-time">7 мин</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Статья 5 -->
+                    <article class="post-card" data-category="tips" data-aos="fade-up" data-aos-delay="50">
+                        <div class="post-image">
+                            <img src="images/blog-seasonal.jpg" alt="Сезонные ароматы" loading="lazy">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Советы</span>
+                            <h3 class="post-title">Сезонные ароматы: что носить зимой, весной, летом и осенью</h3>
+                            <p class="post-excerpt">Как меняются предпочтения в парфюмерии в зависимости от времени года и погоды.</p>
+                            <div class="post-meta">
+                                <span class="post-date">8 января 2026</span>
+                                <span class="read-time">6 мин</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Статья 6 -->
+                    <article class="post-card" data-category="stories" data-aos="fade-up" data-aos-delay="100">
+                        <div class="post-image">
+                            <img src="images/blog-arabic.jpg" alt="Арабские духи" loading="lazy">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Истории</span>
+                            <h3 class="post-title">Магия Востока: история арабской парфюмерии</h3>
+                            <p class="post-excerpt">От древних благовоний до современных шедевров из Дубая — путешествие в мир арабских ароматов.</p>
+                            <div class="post-meta">
+                                <span class="post-date">3 января 2026</span>
+                                <span class="read-time">8 мин</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Статья 7 -->
+                    <article class="post-card" data-category="new" data-aos="fade-up" data-aos-delay="150">
+                        <div class="post-image">
+                            <img src="images/blog-new2026.jpg" alt="Новинки 2026" loading="lazy">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Новинки</span>
+                            <h3 class="post-title">Топ-10 новинок парфюмерии 2026 года</h3>
+                            <p class="post-excerpt">Самые ожидаемые ароматы года, которые уже можно найти в Доме Парфюмерии.</p>
+                            <div class="post-meta">
+                                <span class="post-date">1 января 2026</span>
+                                <span class="read-time">10 мин</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Статья 8 -->
+                    <article class="post-card" data-category="guides" data-aos="fade-up" data-aos-delay="200">
+                        <div class="post-image">
+                            <img src="images/blog-testing.jpg" alt="Тестирование духов" loading="lazy">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Гайды</span>
+                            <h3 class="post-title">Как правильно тестировать духи в магазине</h3>
+                            <p class="post-excerpt">Профессиональные советы по выбору аромата: от первого знакомства до финального решения.</p>
+                            <div class="post-meta">
+                                <span class="post-date">28 декабря 2025</span>
+                                <span class="read-time">5 мин</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Статья 9 -->
+                    <article class="post-card" data-category="tips" data-aos="fade-up" data-aos-delay="250">
+                        <div class="post-image">
+                            <img src="images/blog-storage.jpg" alt="Хранение духов" loading="lazy">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Советы</span>
+                            <h3 class="post-title">Как правильно хранить духи, чтобы они не испортились</h3>
+                            <p class="post-excerpt">Главные ошибки хранения парфюмерии и как их избежать для сохранения аромата на годы.</p>
+                            <div class="post-meta">
+                                <span class="post-date">25 декабря 2025</span>
+                                <span class="read-time">4 мин</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="load-more-container">
+                    <button class="load-more-btn" id="loadMore">Загрузить еще статьи</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Подписка на блог -->
+        <section class="blog-newsletter">
+            <div class="container">
+                <div class="newsletter-content" data-aos="zoom-in">
+                    <h2>Подпишитесь на обновления блога</h2>
+                    <p>Получайте новые статьи прямо на почту. Без спама, только полезный контент о парфюмерии.</p>
+                    <form class="newsletter-form">
+                        <div class="input-group">
+                            <input type="email" placeholder="Ваш email" required>
+                            <button type="submit" class="subscribe-btn">Подписаться</button>
+                        </div>
+                        <div class="form-checkbox">
+                            <input type="checkbox" id="blog-consent" required>
+                            <label for="blog-consent">Я согласен на обработку персональных данных</label>
+                        </div>
+                    </form>
+                    <p class="newsletter-note">Отправляя форму, вы подтверждаете своё согласие с политикой конфиденциальности</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo-white.png" alt="Дом Парфюмерии" width="120">
+                    <p class="tagline">Место, где ароматы обретают голос</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Навигация</h4>
+                        <a href="index.html">Главная</a>
+                        <a href="catalog.html">Каталог</a>
+                        <a href="about.html">О нас</a>
+                        <a href="blog.html">Блог</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Категории блога</h4>
+                        <a href="#guides">Гайды по выбору</a>
+                        <a href="#tips">Советы экспертов</a>
+                        <a href="#stories">Истории ароматов</a>
+                        <a href="#new">Новинки</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Контакты</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> ул. Люльшенко, 19/4</p>
+                        <p><i class="fas fa-map-marker-alt"></i> пр. Соколова, 52А</p>
+                        <p><i class="fas fa-map-marker-alt"></i> пр. Космонавтов, 2/2</p>
+                        <p><i class="fas fa-phone"></i> +7 (938) 105-00-16</p>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Подписка на новости</h4>
+                        <p>Узнавайте первыми о новых статьях</p>
+                        <form class="subscribe-form">
+                            <input type="email" placeholder="Ваш email" required>
+                            <button type="submit">Подписаться</button>
+                        </form>
+                        <div class="social-links">
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="VK"><i class="fab fa-vk"></i></a>
+                            <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Дом Парфюмерии. Все права защищены.</p>
+                <p>ИП Додоев Дилшод Шухратович</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Кнопка "Наверх" -->
+    <button class="scroll-to-top" aria-label="Наверх">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Библиотека для анимаций -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/blog.js"></script>
+</body>
+</html>
