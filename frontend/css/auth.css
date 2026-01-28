@@ -1,0 +1,536 @@
+/* auth.css - Стили для форм авторизации */
+
+/* Контейнер авторизации */
+.auth-container {
+    min-height: calc(100vh - 200px);
+    padding: 80px 0;
+    background: #f9f9f9;
+    display: flex;
+    align-items: center;
+}
+
+.auth-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Бокс авторизации */
+.auth-box {
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.auth-box:hover {
+    transform: translateY(-5px);
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.auth-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.auth-header p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Форма */
+.auth-form .form-group {
+    margin-bottom: 25px;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="text"],
+.auth-form input[type="tel"] {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    transition: all 0.3s;
+    background: #fafafa;
+}
+
+.auth-form input:focus {
+    outline: none;
+    border-color: #b8860b;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+}
+
+/* Обертка для пароля */
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 1rem;
+    transition: color 0.3s;
+}
+
+.toggle-password:hover {
+    color: #333;
+}
+
+/* Ошибки */
+.error-message {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    min-height: 20px;
+}
+
+/* Опции формы */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.checkbox-label input {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.forgot-link {
+    color: #b8860b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.forgot-link:hover {
+    color: #a07609;
+    text-decoration: underline;
+}
+
+/* Кнопка отправки */
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.submit-btn:hover {
+    background: #333;
+}
+
+.submit-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Спиннер */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Разделитель */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+    color: #999;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #eee;
+}
+
+.auth-divider span {
+    padding: 0 15px;
+    font-size: 0.9rem;
+}
+
+/* Социальные кнопки */
+.social-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.social-btn {
+    padding: 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.social-btn.vk-btn {
+    color: #2787F5;
+    border-color: #2787F5;
+}
+
+.social-btn.vk-btn:hover {
+    background: #2787F5;
+    color: white;
+}
+
+.social-btn.google-btn {
+    color: #DB4437;
+    border-color: #DB4437;
+}
+
+.social-btn.google-btn:hover {
+    background: #DB4437;
+    color: white;
+}
+
+/* Футер формы */
+.auth-footer {
+    text-align: center;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+    color: #666;
+}
+
+.auth-footer a {
+    color: #b8860b;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Уведомление о cookie */
+.cookie-notice {
+    margin-top: 30px;
+    padding: 20px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    border-left: 4px solid #b8860b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.cookie-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    flex: 1;
+}
+
+.cookie-content i {
+    color: #b8860b;
+    font-size: 1.2rem;
+    margin-top: 2px;
+}
+
+.cookie-content p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.cookie-content a {
+    color: #b8860b;
+    text-decoration: none;
+}
+
+.cookie-content a:hover {
+    text-decoration: underline;
+}
+
+.cookie-accept {
+    background: #b8860b;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+    white-space: nowrap;
+}
+
+.cookie-accept:hover {
+    background: #a07609;
+}
+
+/* Сообщения об успехе/ошибке */
+.message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .auth-container {
+        padding: 40px 20px;
+    }
+    
+    .auth-box {
+        padding: 30px 20px;
+    }
+    
+    .auth-header h1 {
+        font-size: 2rem;
+    }
+    
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .cookie-notice {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .cookie-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .social-auth {
+        gap: 10px;
+    }
+    
+    .social-btn {
+        padding: 12px;
+        font-size: 0.9rem;
+    }
+}
+/* Дополнительные стили для регистрации */
+
+/* Строка с двумя полями */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+/* Подсказки под полями */
+.hint {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+/* Индикатор сложности пароля */
+.password-strength {
+    margin-top: 10px;
+}
+
+.strength-meter {
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.strength-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 3px;
+    transition: width 0.3s, background 0.3s;
+}
+
+.strength-text {
+    font-size: 0.85rem;
+    color: #666;
+    text-align: center;
+}
+
+/* Блок согласия */
+.consent-box {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 25px 0;
+    border-left: 4px solid #b8860b;
+}
+
+.consent-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.consent-header i {
+    color: #b8860b;
+    font-size: 1.5rem;
+}
+
+.consent-header h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+}
+
+.consent-content p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.consent-checkboxes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.consent-checkboxes .checkbox-label {
+    align-items: flex-start;
+}
+
+.consent-checkboxes .checkbox-label.required span {
+    color: #333;
+    font-weight: 500;
+}
+
+.consent-links {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.consent-links a {
+    color: #b8860b;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.consent-links a:hover {
+    text-decoration: underline;
+}
+
+/* Адаптивность для регистрации */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .consent-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Индикаторы сложности пароля */
+.strength-0 { width: 20%; background: #dc3545; }
+.strength-1 { width: 40%; background: #fd7e14; }
+.strength-2 { width: 60%; background: #ffc107; }
+.strength-3 { width: 80%; background: #20c997; }
+.strength-4 { width: 100%; background: #198754; }

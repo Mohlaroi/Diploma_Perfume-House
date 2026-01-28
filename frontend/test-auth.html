@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Тест авторизации</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; }
+        button { padding: 10px 20px; margin: 5px; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>Тестирование авторизации</h1>
+    
+    <div class="test-section">
+        <h2>1. Проверка PHP</h2>
+        <button onclick="testPHP()">Проверить PHP</button>
+        <div id="php-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>2. Проверка базы данных</h2>
+        <button onclick="testDB()">Проверить БД</button>
+        <div id="db-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h2>3. Тест входа</h2>
+        <button onclick="testLogin()">Тестовый вход</button>
+        <div id="login-result"></div>
+    </div>
+    
+    <script>
+        async function testPHP() {
+            const result = document.getElementById('php-result');
+            try {
+                const response = await fetch('../php/test.php');
+                const text = await response.text();
+                result.innerHTML = `<p class="success">✅ PHP работает</p><pre>${text}</pre>`;
+            } catch (error) {
+                result.innerHTML = `<p class="error">❌ Ошибка PHP: ${error.message}</p>`;
+            }
+        }
+        
+        async function testDB() {
+            const result = document.getElementById('db-result');
+            try {
+                const response = await fetch('../php/create_test_user.php');
+                const text = await response.text();
+                result.innerHTML = `<p class="success">✅ База данных работает</p><pre>${text}</pre>`;
+            } catch (error) {
+                result.innerHTML = `<p class="error">❌ Ошибка БД: ${error.message}</p>`;
+            }
+        }
+        
+        async function testLogin() {
+            const result = document.getElementById('login-result');
+            try {
+                const response = await fetch('../php/login.php', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'Test123!'
+                    })
+                });
+                
+                const data = await response.json();
+                if (data.success) {
+                    result.innerHTML = `<p class="success">✅ Вход успешен!</p><pre>${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    result.innerHTML = `<p class="error">❌ Ошибка входа: ${data.message}</p>`;
+                }
+            } catch (error) {
+                result.innerHTML = `<p class="error">❌ Ошибка сети: ${error.message}</p>`;
+            }
+        }
+    </script>
+</body>
+</html>

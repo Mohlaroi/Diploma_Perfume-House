@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест для подбора аромата | Дом Парфюмерии - подберите идеальные духи</title>
+    <meta name="description" content="Пройдите тест и узнайте, какие духи подходят именно вам. Персональные рекомендации от экспертов Дома Парфюмерии.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Тест для подбора аромата | Дом Парфюмерии">
+    <meta property="og:description" content="Узнайте, какие духи идеально вам подходят">
+    <meta property="og:image" content="images/test-hero.jpg">
+    <meta property="og:type" content="website">
+    
+    <!-- Шрифты -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/test.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+</head>
+<body>
+    <!-- Верхняя панель -->
+    <div class="top-bar">
+        <div class="container">
+            <p>Пройдите тест и получите скидку 10% на рекомендованные ароматы</p>
+            <button class="close-top-bar" aria-label="Закрыть">&times;</button>
+        </div>
+    </div>
+
+    <!-- Основная шапка -->
+    <header class="main-header">
+        <div class="container">
+            <!-- Логотип -->
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/logo.png" alt="Дом Парфюмерии" width="150">
+                </a>
+            </div>
+
+            <!-- Навигация -->
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="menu-item dropdown">
+                        <a href="catalog.html" class="nav-link">Каталог <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>По типу</h4>
+                                <a href="catalog-women.html">Женские духи</a>
+                                <a href="catalog-men.html">Мужские духи</a>
+                                <a href="catalog-unisex.html">Унисекс</a>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>По категориям</h4>
+                                <a href="catalog-niche.html">Нишевые</a>
+                                <a href="catalog-arabic.html">Арабские</a>
+                                <a href="catalog-oils.html">Масла на разлив</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="about.html" class="nav-link">О нас</a></li>
+                    <li><a href="blog.html" class="nav-link">Блог</a></li>
+                    <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                    <li><a href="wholesale.html" class="nav-link">Оптовикам</a></li>
+                </ul>
+            </nav>
+
+            <!-- Иконки -->
+            <div class="header-actions">
+                <a href="#" class="action-icon search-icon" aria-label="Поиск">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="account.html" class="action-icon user-icon" aria-label="Личный кабинет">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="cart.html" class="action-icon cart-icon" aria-label="Корзина">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <!-- Мобильное меню -->
+            <button class="mobile-menu-toggle" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Герой-секция теста -->
+    <section class="test-hero">
+        <div class="hero-content">
+            <div class="container">
+                <h1 class="page-title">Найдите свой аромат</h1>
+                <p class="page-subtitle">Ответьте на 5 простых вопросов и получите персональные рекомендации</p>
+                <div class="test-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span id="currentQuestion">0</span> из <span id="totalQuestions">5</span> вопросов
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- Основное содержание -->
+    <main class="test-content">
+        <div class="container">
+            <!-- Контейнер теста -->
+            <div class="test-container">
+                <!-- Вопросы будут добавляться динамически -->
+                <div class="test-intro" id="testIntro">
+                    <div class="intro-content">
+                        <h2>Как это работает?</h2>
+                        <p>Наш алгоритм подберет идеальный аромат на основе ваших предпочтений, характера и образа жизни. 
+                        Результаты теста помогут вам:</p>
+                        
+                        <div class="benefits-list">
+                            <div class="benefit-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Узнать свой парфюмерный тип</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Получить персональные рекомендации</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Сэкономить время на поиске</span>
+                            </div>
+                            <div class="benefit-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Получить промокод на скидку</span>
+                            </div>
+                        </div>
+                        
+                        <button class="start-test-btn" id="startTestBtn">
+                            Начать тест
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        
+                        <p class="test-note">Тест займет не более 3 минут</p>
+                    </div>
+                </div>
+                
+                <!-- Контейнер для вопросов -->
+                <div class="questions-container" id="questionsContainer" style="display: none;">
+                    <!-- Вопросы будут вставляться сюда -->
+                </div>
+                
+                <!-- Результаты теста -->
+                <div class="test-results" id="testResults" style="display: none;">
+                    <div class="results-content">
+                        <!-- Результаты будут заполняться динамически -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Боковая панель с информацией -->
+            <aside class="test-sidebar">
+                <div class="sidebar-card">
+                    <h3>Ваш результат</h3>
+                    <div class="result-placeholder" id="resultPlaceholder">
+                        <p>Пройдите тест, чтобы увидеть рекомендации</p>
+                    </div>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3>Как использовать результаты?</h3>
+                    <ul class="tips-list">
+                        <li>Придите в наш магазин с результатом теста</li>
+                        <li>Протестируйте рекомендованные ароматы</li>
+                        <li>Получите скидку 10% на покупку</li>
+                        <li>Задайте вопросы нашим экспертам</li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-card">
+                    <h3>Наши магазины</h3>
+                    <div class="store-mini">
+                        <p><i class="fas fa-map-marker-alt"></i> ул. Люльшенко, 19/4</p>
+                        <p><i class="fas fa-clock"></i> 10:00 - 20:00</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo-white.png" alt="Дом Парфюмерии" width="120">
+                    <p class="tagline">Место, где ароматы обретают голос</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Тест и подбор</h4>
+                        <a href="test.html" class="active">Подобрать аромат</a>
+                        <a href="#perfume-types">Типы ароматов</a>
+                        <a href="#guides">Гайды по выбору</a>
+                        <a href="#consultation">Консультация</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Магазин</h4>
+                        <a href="catalog-women.html">Женские духи</a>
+                        <a href="catalog-men.html">Мужские духи</a>
+                        <a href="catalog-unisex.html">Унисекс</a>
+                        <a href="catalog-niche.html">Нишевые</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Контакты</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> ул. Люльшенко, 19/4</p>
+                        <p><i class="fas fa-map-marker-alt"></i> пр. Соколова, 52А</p>
+                        <p><i class="fas fa-map-marker-alt"></i> пр. Космонавтов, 2/2</p>
+                        <p><i class="fas fa-phone"></i> +7 (938) 105-00-16</p>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Подписка</h4>
+                        <p>Узнавайте первыми о новинках</p>
+                        <form class="subscribe-form">
+                            <input type="email" placeholder="Ваш email" required>
+                            <button type="submit">Подписаться</button>
+                        </form>
+                        <div class="social-links">
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="VK"><i class="fab fa-vk"></i></a>
+                            <a href="#" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Дом Парфюмерии. Все права защищены.</p>
+                <p>ИП Додоев Дилшод Шухратович</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Кнопка "Наверх" -->
+    <button class="scroll-to-top" aria-label="Наверх">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- Скрипты -->
+    <script src="js/main.js"></script>
+    <script src="js/test.js"></script>
+</body>
+</html>

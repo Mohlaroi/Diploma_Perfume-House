@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в личный кабинет | Дом Парфюмерии</title>
+    <meta name="description" content="Войдите в личный кабинет Дома Парфюмерии. Отслеживайте заказы, получайте персональные предложения.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Вход в личный кабинет | Дом Парфюмерии">
+    <meta property="og:description" content="Личный кабинет покупателя духов">
+    <meta property="og:image" content="../images/account-hero.jpg">
+    <meta property="og:type" content="website">
+    
+    <!-- Шрифты -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+</head>
+<body>
+    <!-- Верхняя панель -->
+    <div class="top-bar">
+        <div class="container">
+            <p>Зарегистрируйтесь, чтобы получать новости о распродажах и новых поступлениях</p>
+            <button class="close-top-bar" aria-label="Закрыть">&times;</button>
+        </div>
+    </div>
+
+    <!-- Основная шапка -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo.png" alt="Дом Парфюмерии" width="150">
+                </a>
+            </div>
+
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="menu-item dropdown">
+                        <a href="../catalog.html" class="nav-link">Каталог <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>По типу</h4>
+                                <a href="../catalog-women.html">Женские духи</a>
+                                <a href="../catalog-men.html">Мужские духи</a>
+                                <a href="../catalog-unisex.html">Унисекс</a>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>По категориям</h4>
+                                <a href="../catalog-niche.html">Нишевые</a>
+                                <a href="../catalog-arabic.html">Арабские</a>
+                                <a href="../catalog-oils.html">Масла на разлив</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="../about.html" class="nav-link">О нас</a></li>
+                    <li><a href="../blog.html" class="nav-link">Блог</a></li>
+                    <li><a href="../contacts.html" class="nav-link">Контакты</a></li>
+                    <li><a href="../wholesale.html" class="nav-link">Оптовикам</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#" class="action-icon search-icon" aria-label="Поиск">
+                    <i class="fas fa-search"></i>
+                </a>
+                <a href="login.html" class="action-icon user-icon active" aria-label="Личный кабинет">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="../cart.html" class="action-icon cart-icon" aria-label="Корзина">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Основное содержание -->
+    <main class="auth-container">
+        <div class="container">
+            <div class="auth-wrapper">
+                <!-- Форма входа -->
+                <div class="auth-box active" id="loginBox">
+                    <div class="auth-header">
+                        <h1>Вход в личный кабинет</h1>
+                        <p>Войдите, чтобы управлять заказами и получать персональные предложения</p>
+                    </div>
+                    
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label for="loginEmail">Email *</label>
+                            <input type="email" id="loginEmail" name="email" required 
+                                   placeholder="ваш@email.ru" autocomplete="email">
+                            <div class="error-message" id="emailError"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loginPassword">Пароль *</label>
+                            <div class="password-wrapper">
+                                <input type="password" id="loginPassword" name="password" required 
+                                       placeholder="Введите пароль" autocomplete="current-password">
+                                <button type="button" class="toggle-password" aria-label="Показать пароль">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="error-message" id="passwordError"></div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="rememberMe" name="remember">
+                                <span>Запомнить меня</span>
+                            </label>
+                            <a href="forgot-password.html" class="forgot-link">Забыли пароль?</a>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="loginSubmit">
+                            <span>Войти</span>
+                            <div class="spinner" style="display: none;"></div>
+                        </button>
+                        
+                        <div class="auth-divider">
+                            <span>или</span>
+                        </div>
+                        
+                        <div class="social-auth">
+                            <button type="button" class="social-btn vk-btn">
+                                <i class="fab fa-vk"></i> Войти через VK
+                            </button>
+                            <button type="button" class="social-btn google-btn">
+                                <i class="fab fa-google"></i> Войти через Google
+                            </button>
+                        </div>
+                        
+                        <div class="auth-footer">
+                            <p>Ещё нет аккаунта? <a href="register.html" class="switch-link">Зарегистрироваться</a></p>
+                        </div>
+                    </form>
+                    
+                    <!-- Уведомление о cookie -->
+                    <div class="cookie-notice" id="cookieNotice">
+                        <div class="cookie-content">
+                            <i class="fas fa-cookie-bite"></i>
+                            <p>Мы используем файлы cookie для обеспечения работы сайта и вашего удобства. 
+                            <a href="../../legal/privacy-policy.html">Подробнее</a></p>
+                        </div>
+                        <button class="cookie-accept" id="cookieAccept">Принять</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../images/logo-white.png" alt="Дом Парфюмерии" width="120">
+                    <p class="tagline">Место, где ароматы обретают голос</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Аккаунт</h4>
+                        <a href="login.html">Вход</a>
+                        <a href="register.html">Регистрация</a>
+                        <a href="forgot-password.html">Восстановить пароль</a>
+                        <a href="../account/index.html">Личный кабинет</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Магазин</h4>
+                        <a href="../catalog-women.html">Женские духи</a>
+                        <a href="../catalog-men.html">Мужские духи</a>
+                        <a href="../catalog-unisex.html">Унисекс</a>
+                        <a href="../catalog-niche.html">Нишевые</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Контакты</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> ул. Люльшенко, 19/4</p>
+                        <p><i class="fas fa-map-marker-alt"></i> пр. Соколова, 52А</p>
+                        <p><i class="fas fa-map-marker-alt"></i> пр. Космонавтов, 2/2</p>
+                        <p><i class="fas fa-phone"></i> +7 (938) 105-00-16</p>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Политики</h4>
+                        <a href="../../legal/privacy-policy.html">Политика конфиденциальности</a>
+                        <a href="../terms.html">Пользовательское соглашение</a>
+                        <a href="../cookie-policy.html">Политика использования cookie</a>
+                        <a href="../pd-consent.html">Согласие на обработку ПДн</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Дом Парфюмерии. Все права защищены.</p>
+                <p>ИП Додоев Дилшод Шухратович, ОГРНИП 123456789012345</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

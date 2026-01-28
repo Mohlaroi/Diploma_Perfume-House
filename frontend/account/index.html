@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет | Дом Парфюмерии</title>
+    <meta name="description" content="Личный кабинет Дома Парфюмерии. Управляйте заказами, избранным и персональными данными.">
+    
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Личный кабинет | Дом Парфюмерии">
+    <meta property="og:description" content="Управление заказами и профилем">
+    <meta property="og:image" content="../images/account-hero.jpg">
+    <meta property="og:type" content="website">
+    
+    <!-- Шрифты -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/account.css">
+    <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+</head>
+<body>
+    <!-- Верхняя панель -->
+    <div class="top-bar">
+        <div class="container">
+            <p>Получите скидку 15% на первую покупку при регистрации</p>
+            <button class="close-top-bar" aria-label="Закрыть">&times;</button>
+        </div>
+    </div>
+
+    <!-- Основная шапка -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="../index.html">
+                    <img src="../images/logo.png" alt="Дом Парфюмерии" width="150">
+                </a>
+            </div>
+
+            <nav class="main-nav">
+                <ul class="nav-menu">
+                    <li class="menu-item dropdown">
+                        <a href="../catalog.html" class="nav-link">Каталог <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-menu">
+                            <div class="dropdown-column">
+                                <h4>По типу</h4>
+                                <a href="../catalog-women.html">Женские духи</a>
+                                <a href="../catalog-men.html">Мужские духи</a>
+                                <a href="../catalog-unisex.html">Унисекс</a>
+                            </div>
+                            <div class="dropdown-column">
+                                <h4>По категориям</h4>
+                                <a href="../catalog-niche.html">Нишевые</a>
+                                <a href="../catalog-arabic.html">Арабские</a>
+                                <a href="../catalog-oils.html">Масла на разлив</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="../about.html" class="nav-link">О нас</a></li>
+                    <li><a href="../blog.html" class="nav-link">Блог</a></li>
+                    <li><a href="../contacts.html" class="nav-link">Контакты</a></li>
+                    <li><a href="../wholesale.html" class="nav-link">Оптовикам</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="#" class="action-icon search-icon" aria-label="Поиск">
+                    <i class="fas fa-search"></i>
+                </a>
+                <div class="user-dropdown">
+                    <button class="action-icon user-icon active" id="userDropdownBtn" aria-label="Личный кабинет">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <div class="user-dropdown-menu" id="userDropdownMenu">
+                        <div class="user-info">
+                            <div class="user-avatar">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="user-details">
+                                <div class="user-name" id="userName">Загрузка...</div>
+                                <div class="user-email" id="userEmail">...</div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="index.html" class="dropdown-link active">
+                            <i class="fas fa-home"></i> Обзор
+                        </a>
+                        <a href="orders.html" class="dropdown-link">
+                            <i class="fas fa-shopping-bag"></i> Мои заказы
+                        </a>
+                        <a href="wishlist.html" class="dropdown-link">
+                            <i class="fas fa-heart"></i> Избранное
+                        </a>
+                        <a href="reviews.html" class="dropdown-link">
+                            <i class="fas fa-star"></i> Мои отзывы
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="settings.html" class="dropdown-link">
+                            <i class="fas fa-cog"></i> Настройки
+                        </a>
+                        <a href="../php/logout.php" class="dropdown-link logout">
+                            <i class="fas fa-sign-out-alt"></i> Выйти
+                        </a>
+                    </div>
+                </div>
+                <a href="../cart.html" class="action-icon cart-icon" aria-label="Корзина">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+
+            <button class="mobile-menu-toggle" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Основное содержание -->
+    <main class="account-container">
+        <div class="container">
+            <div class="account-layout">
+                <!-- Боковое меню -->
+                <aside class="account-sidebar">
+                    <div class="user-profile-card">
+                        <div class="user-avatar-large">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                        <div class="user-info">
+                            <h3 id="sidebarUserName">Загрузка...</h3>
+                            <p class="user-email" id="sidebarUserEmail">...</p>
+                            <p class="user-since">Пользователь с <span id="userSince">2026</span></p>
+                        </div>
+                        <div class="user-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="ordersCount">0</div>
+                                <div class="stat-label">Заказов</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="wishlistCount">0</div>
+                                <div class="stat-label">В избранном</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <nav class="sidebar-nav">
+                        <a href="index.html" class="nav-link active">
+                            <i class="fas fa-home"></i> Обзор
+                        </a>
+                        <a href="orders.html" class="nav-link">
+                            <i class="fas fa-shopping-bag"></i> Мои заказы
+                        </a>
+                        <a href="wishlist.html" class="nav-link">
+                            <i class="fas fa-heart"></i> Избранное
+                        </a>
+                        <a href="reviews.html" class="nav-link">
+                            <i class="fas fa-star"></i> Мои отзывы
+                        </a>
+                        <a href="test-results.html" class="nav-link">
+                            <i class="fas fa-vial"></i> Результаты теста
+                        </a>
+                        <a href="addresses.html" class="nav-link">
+                            <i class="fas fa-map-marker-alt"></i> Адреса доставки
+                        </a>
+                        <a href="settings.html" class="nav-link">
+                            <i class="fas fa-cog"></i> Настройки профиля
+                        </a>
+                        <a href="../php/logout.php" class="nav-link logout">
+                            <i class="fas fa-sign-out-alt"></i> Выйти
+                        </a>
+                    </nav>
+
+                    <div class="sidebar-promo">
+                        <div class="promo-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h4>Ваша скидка</h4>
+                        <div class="discount-badge">10%</div>
+                        <p>Действует на все товары</p>
+                    </div>
+                </aside>
+
+                <!-- Основной контент -->
+                <div class="account-content">
+                    <!-- Приветствие -->
+                    <div class="welcome-section">
+                        <div class="welcome-header">
+                            <h1>Добро пожаловать, <span id="welcomeUserName">Пользователь</span>!</h1>
+                            <p id="welcomeMessage">Рады видеть вас снова в Доме Парфюмерии</p>
+                        </div>
+                        <div class="welcome-actions">
+                            <a href="../catalog.html" class="action-btn primary">
+                                <i class="fas fa-shopping-bag"></i> Продолжить покупки
+                            </a>
+                            <a href="../test.html" class="action-btn secondary">
+                                <i class="fas fa-vial"></i> Пройти тест ароматов
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Быстрые действия -->
+                    <div class="quick-actions">
+                        <h2>Быстрые действия</h2>
+                        <div class="actions-grid">
+                            <a href="orders.html?status=pending" class="action-card">
+                                <div class="action-icon pending">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <h3>Ожидают оплаты</h3>
+                                <p id="pendingOrders">0 заказов</p>
+                            </a>
+                            <a href="orders.html?status=processing" class="action-card">
+                                <div class="action-icon processing">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <h3>В обработке</h3>
+                                <p id="processingOrders">0 заказов</p>
+                            </a>
+                            <a href="wishlist.html" class="action-card">
+                                <div class="action-icon wishlist">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <h3>Избранное</h3>
+                                <p id="wishlistItems">0 товаров</p>
+                            </a>
+                            <a href="settings.html" class="action-card">
+                                <div class="action-icon settings">
+                                    <i class="fas fa-cog"></i>
+                                </div>
+                                <h3>Настройки</h3>
+                                <p>Профиль и безопасность</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Последние заказы -->
+                    <div class="recent-orders">
+                        <div class="section-header">
+                            <h2>Последние заказы</h2>
+                            <a href="orders.html" class="view-all">Все заказы <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        
+                        <div class="orders-list" id="recentOrders">
+                            <!-- Заказы будут загружены через JS -->
+                            <div class="loading-orders">
+                                <div class="spinner"></div>
+                                <p>Загрузка заказов...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Рекомендации -->
+                    <div class="recommendations-section">
+                        <div class="section-header">
+                            <h2>Рекомендуем вам</h2>
+                            <p>На основе ваших покупок и предпочтений</p>
+                        </div>
+                        
+                        <div class="recommendations-grid" id="recommendations">
+                            <!-- Рекомендации будут загружены через JS -->
+                            <div class="recommendation-card">
+                                <div class="product-image">
+                                    <img src="../images/products/moudon-vanille.jpg" alt="Moudon Vanille Exquise" loading="lazy">
+                                </div>
+                                <div class="product-info">
+                                    <h3>Moudon Vanille Exquise</h3>
+                                    <p>Изысканная ваниль с цветочными акцентами</p>
+                                    <div class="price">12 400 ₽</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- История активности -->
+                    <div class="activity-section">
+                        <div class="section-header">
+                            <h2>Недавняя активность</h2>
+                        </div>
+                        
+                        <div class="activity-timeline" id="activityTimeline">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Вы оформили заказ <strong>ORD-2026-00001</strong></p>
+                                    <span class="activity-time">2 дня назад</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-heart"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Добавили в избранное <strong>Initio Psychedelic Love</strong></p>
+                                    <span class="activity-time">5 дней назад</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../images/logo-white.png" alt="Дом Парфюмерии" width="120">
+                    <p class="tagline">Место, где ароматы обретают голос</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Личный кабинет</h4>
+                        <a href="index.html">Обзор</a>
+                        <a href="orders.html">Заказы</a>
+                        <a href="wishlist.html">Избранное</a>
+                        <a href="settings.html">Настройки</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Магазин</h4>
+                        <a href="../catalog-women.html">Женские духи</a>
+                        <a href="../catalog-men.html">Мужские духи</a>
+                        <a href="../catalog-unisex.html">Унисекс</a>
+                        <a href="../catalog-niche.html">Нишевые</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Контакты</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> ул. Люльшенко, 19/4</p>
+                        <p><i class="fas fa-map-marker-alt"></i> пр. Соколова, 52А</p>
+                        <p><i class="fas fa-map-marker-alt"></i> пр. Космонавтов, 2/2</p>
+                        <p><i class="fas fa-phone"></i> +7 (938) 105-00-16</p>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Помощь</h4>
+                        <a href="../../legal/privacy-policy.html">Конфиденциальность</a>
+                        <a href="../../legal/terms.html">Пользовательское соглашение</a>
+                        <a href="../contacts.html">Контакты поддержки</a>
+                        <a href="../faq.html">Частые вопросы</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Дом Парфюмерии. Все права защищены.</p>
+                <p>ИП Додоев Дилшод Шухратович, ОГРНИП 123456789012345</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Скрипты -->
+    <script src="../js/main.js"></script>
+    <script src="../js/account.js"></script>
+</body>
+</html>
