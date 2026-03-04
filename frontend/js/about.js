@@ -1,116 +1,131 @@
-// Анимация появления элементов при скролле
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+document.addEventListener('DOMContentLoaded', function() {
+    // 🎯 IntersectionObserver для плавного появления секций
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Наблюдаем за всеми секциями
+    document.querySelectorAll('.about-section').forEach(section => {
+        sectionObserver.observe(section);
     });
-}, observerOptions);
 
-// Наблюдаем за всеми секциями
-document.querySelectorAll('.about-section').forEach(section => {
-    observer.observe(section);
-});
+    // 🔥 ОДИН обработчик scroll для ВСЕГО
+    let lastScrollTop = 0;
+    const header = document.querySelector('.main-header');
+    const scrollToTopBtn = document.querySelector('.scroll-to-top');
+    const scrollIndicator = document.querySelector('.scroll-indicator');
 
-// Плавный скролл к секциям
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href === '#' || href.startsWith('#!')) return;
+    const handleScroll = () => {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        e.preventDefault();
-        const targetElement = document.querySelector(href);
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 100,
-                behavior: 'smooth'
-            });
+        // Sticky header (показать после 200px)
+        if (scrollTop > 200) {
+            header.classList.add('sticky');
+        } else {
+            header.classList.remove('sticky');
         }
-    });
-});
+        
+        // Hide/show header при скролле вниз/вверх
+        if (scrollTop > lastScrollTop && scrollTop > 200) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(0)';
+        }
+        
+        // Кнопка наверх (после 300px)
+        if (scrollTop > 300) {
+            scrollToTopBtn.classList.add('visible');
+        } else {
+            scrollToTopBtn.classList.remove('visible');
+        }
+        
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+    };
 
-// Кнопка "Наверх"
-const scrollToTopBtn = document.querySelector('.scroll-to-top');
+    // ✅ Привязываем scroll
+    window.addEventListener('scroll', handleScroll);
 
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        scrollToTopBtn.classList.add('visible');
-    } else {
-        scrollToTopBtn.classList.remove('visible');
-    }
-});
-
-scrollToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// Закрепление шапки при скролле
-const header = document.querySelector('.main-header');
-let lastScrollTop = 0;
-
-window.addEventListener('scroll', () => {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
-    // Показываем/скрываем закреплённую шапку
-    if (scrollTop > 200) {
-        header.classList.add('sticky');
-    } else {
-        header.classList.remove('sticky');
-    }
-    
-    // Скрываем шапку при скролле вниз, показываем при скролле вверх
-    if (scrollTop > lastScrollTop && scrollTop > 200) {
-        // Скролл вниз
-        header.style.transform = 'translateY(-100%)';
-    } else {
-        // Скролл вверх
-        header.style.transform = 'translateY(0)';
-    }
-    
-    lastScrollTop = scrollTop;
-});
-
-// Анимация скролла в индикаторе
-const scrollIndicator = document.querySelector('.scroll-indicator');
-if (scrollIndicator) {
-    scrollIndicator.addEventListener('click', () => {
+    // Кнопка наверх
+    scrollToTopBtn.addEventListener('click', function(e) {
+        e.preventDefault();
         window.scrollTo({
-            top: window.innerHeight,
+            top: 0,
             behavior: 'smooth'
         });
     });
-}
 
-// Плавная загрузка изображений
-document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    
-    if ('loading' in HTMLImageElement.prototype) {
-        // Браузер поддерживает lazy loading
-        images.forEach(img => {
-            img.src = img.dataset.src || img.src;
-        });
-    } else {
-        // Fallback для старых браузеров
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src || img.src;
-                    img.classList.add('loaded');
-                    observer.unobserve(img);
-                }
+    // Scroll-индикатор (стрелка вниз)
+    if (scrollIndicator) {
+        scrollIndicator.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
             });
         });
-        
-        images.forEach(img => imageObserver.observe(img));
     }
+
+    // Плавный скролл для якорей
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href === '#' || href.startsWith('#!')) return;
+            
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) {
+                const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 100;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // 🎨 Инициализация первых видимых секций
+    setTimeout(() => {
+        document.querySelectorAll('.about-section').forEach((section, index) => {
+            if (index === 0) {
+                section.classList.add('visible');
+            }
+        });
+    }, 100);
 });
+
+// ✅ Lazy loading fallback для старых браузеров
+if ('loading' in HTMLImageElement.prototype) {
+    // Современные браузеры поддерживают loading="lazy"
+} else {
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src || img.src;
+                img.classList.add('loaded');
+                imageObserver.unobserve(img);
+            }
+        });
+    });
+
+    document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// 🛡️ Оптимизация производительности
+if ('IntersectionObserver' in window === false) {
+    // Fallback для очень старых браузеров
+    document.querySelectorAll('.about-section').forEach(section => {
+        section.classList.add('visible');
+    });
+}

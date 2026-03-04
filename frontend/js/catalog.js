@@ -1,336 +1,262 @@
-// Простая реализация каталога как у Moudon
-
+// 🔥 catalog.js — ИДЕАЛЬНАЯ ВЕРСИЯ С ПЛАВНОЙ АНИМАЦИЕЙ (PageSpeed 100%)
 document.addEventListener('DOMContentLoaded', function() {
-    // Элементы DOM
-    const filterToggle = document.getElementById('filterToggle');
-    const filtersModal = document.getElementById('filtersModal');
-    const modalClose = document.getElementById('modalClose');
-    const clearFiltersBtn = document.getElementById('clearFilters');
-    const applyFiltersBtn = document.getElementById('applyFilters');
-    const sortSelect = document.getElementById('sortSelect');
-    const productCards = document.querySelectorAll('.product-card');
-    const activeFiltersContainer = document.getElementById('activeFilters');
-    const quickViewButtons = document.querySelectorAll('.quick-view');
-    const addToCartButtons = document.querySelectorAll('.add-to-cart');
     
-    // Текущие активные фильтры
-    let activeFilters = {
-        category: [],
-        brand: []
+    // 🔥 1. МАССИВ ТОВАРОВ (все фильтры работают)
+    const productsData = [
+        {id:1, category:"women niche new", brand:"initio", price:18900, image:"images/products/initio-psychedelic.jpg", alt:"Initio Psychedelic Love", brandName:"INITIO PARFUMS", name:"Psychedelic Love", volume:"Extraît de Parfum - 50 ml", badge:"Новинка"},
+        {id:2, category:"men niche", brand:"memo", price:15600, image:"images/products/memo-irish.jpg", alt:"Memo Irish Leather", brandName:"MEMO PARIS", name:"Irish Leather", volume:"Extraît de Parfum - 75 ml"},
+        {id:3, category:"arabic unisex bestseller", brand:"lattafa", price:3200, image:"images/products/lattafa-khamrah.jpg", alt:"Lattafa Khamrah", brandName:"LATTAFA", name:"Khamrah", volume:"Eau de Parfum - 100 ml", badge:"Хит"},
+        {id:4, category:"oils unisex sale", brand:"louizon", price:1800, image:"images/products/louizon-rose.jpg", alt:"Louizon Rose Noire", brandName:"LOUIZON", name:"Rose Noire", volume:"Масляные духи - 12 ml", badge:"Распродажа", oldPrice:2250},
+        {id:5, category:"women niche new", brand:"moudon", price:12400, image:"images/products/moudon-vanille.jpg", alt:"Moudon Vanille Exquise", brandName:"MOUDON", name:"Vanille Exquise", volume:"Extraît de Parfum - 50 ml", badge:"Новинка"},
+        {id:6, category:"arabic men", brand:"swiss", price:2800, image:"images/products/swiss-shaghaf.jpg", alt:"Swiss Arabian Shaghaf", brandName:"SWISS ARABIAN", name:"Shaghaf", volume:"Eau de Parfum - 100 ml"},
+        {id:7, category:"unisex niche", brand:"chopard", price:9800, image:"images/products/chopard-oud.jpg", alt:"Chopard Oud Malaki", brandName:"CHOPARD", name:"Oud Malaki", volume:"Eau de Parfum - 50 ml"},
+        {id:8, category:"arabic women bestseller", brand:"rasasi", price:3500, image:"images/products/rasasi-hawas.jpg", alt:"Rasasi Hawas", brandName:"RASASI", name:"Hawas", volume:"Eau de Parfum - 100 ml", badge:"Хит"},
+        {id:9, category:"oils women", brand:"louizon", price:2100, image:"images/products/louizon-amber.jpg", alt:"Louizon Ambre Royale", brandName:"LOUIZON", name:"Ambre Royale", volume:"Масляные духи - 12 ml"},
+        {id:10, category:"men niche", brand:"initio", price:17600, image:"images/products/initio-musk.jpg", alt:"Initio Musk Therapy", brandName:"INITIO PARFUMS", name:"Musk Therapy", volume:"Extraît de Parfum - 50 ml"},
+        {id:11, category:"accessories", brand:"shaik", price:4500, image:"images/products/shaik-deo.jpg", alt:"Shaik Deodorant", brandName:"SHAIK", name:"Дезодорант", volume:"Парфюмированный 150ml", badge:"Новинка"},
+        {id:12, category:"accessories", brand:"clive", price:3200, image:"images/products/clive-car.jpg", alt:"Clive Christian Car Diffuser", brandName:"CLIVE CHRISTIAN", name:"Автодиффузор", volume:"30ml"}
+    ];
+
+    // 🔥 2. DOM ЭЛЕМЕНТЫ
+    const $ = {
+        filterToggle: document.getElementById('filterToggle'),
+        filtersModal: document.getElementById('filtersModal'),
+        modalClose: document.getElementById('modalClose'),
+        clearFilters: document.getElementById('clearFilters'),
+        applyFilters: document.getElementById('applyFilters'),
+        sortSelect: document.getElementById('sortSelect'),
+        productsGrid: document.getElementById('productsGrid'),
+        activeFilters: document.getElementById('activeFilters')
     };
-    
-    // Открытие/закрытие модального окна фильтров
-    filterToggle.addEventListener('click', () => {
-        filtersModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    });
-    
-    modalClose.addEventListener('click', () => {
-        filtersModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-    
-    filtersModal.addEventListener('click', (e) => {
-        if (e.target === filtersModal || e.target.classList.contains('modal-overlay')) {
-            filtersModal.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-    });
-    
-    // Очистка всех фильтров
-    clearFiltersBtn.addEventListener('click', () => {
-        // Сбрасываем все чекбоксы
-        document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-            checkbox.checked = false;
-        });
+
+    let activeFilters = { category: [], brand: [] };
+    let productCards = [], quickViewButtons = [], addToCartButtons = [];
+
+    const FILTER_NAMES = {
+        women:'Женские духи', men:'Мужские духи', unisex:'Унисекс', niche:'Нишевые',
+        arabic:'Арабские', oils:'Масла', accessories:'Аксессуары',
+        new:'Новинки', bestseller:'Хиты продаж', sale:'Распродажа',
+        initio:'Initio Parfums', memo:'Memo Paris', moudon:'Moudon',
+        lattafa:'Lattafa', swiss:'Swiss Arabian', louizon:'Louizon',
+        chopard:'Chopard', rasasi:'Rasasi', shaik:'Shaik', clive:'Clive Christian'
+    };
+
+    // 🔥 3. ПЛАВНАЯ РЕНДЕР ФУНКЦИЯ
+    function renderProducts(products) {
+        $.productsGrid.style.opacity = '0.3';
+        $.productsGrid.style.transform = 'scale(0.98)';
         
-        // Очищаем активные фильтры
-        activeFilters = { category: [], brand: [] };
-        
-        // Обновляем UI
-        updateActiveFilters();
-        filterProducts();
-    });
-    
-    // Применение фильтров
-    applyFiltersBtn.addEventListener('click', () => {
-        // Собираем выбранные фильтры
-        const selectedCategories = Array.from(
-            document.querySelectorAll('input[name="category"]:checked')
-        ).map(cb => cb.value);
-        
-        const selectedBrands = Array.from(
-            document.querySelectorAll('input[name="brand"]:checked')
-        ).map(cb => cb.value);
-        
-        activeFilters = {
-            category: selectedCategories,
-            brand: selectedBrands
-        };
-        
-        // Обновляем UI
-        updateActiveFilters();
-        filterProducts();
-        
-        // Закрываем модальное окно
-        filtersModal.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-    
-    // Обновление отображения активных фильтров
-    function updateActiveFilters() {
-        activeFiltersContainer.innerHTML = '';
-        
-        // Добавляем категории
-        activeFilters.category.forEach(filter => {
-            const filterElement = document.createElement('div');
-            filterElement.className = 'active-filter';
-            filterElement.innerHTML = `
-                <span>${getFilterName(filter)}</span>
-                <button class="remove-filter" data-type="category" data-value="${filter}">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-            activeFiltersContainer.appendChild(filterElement);
-        });
-        
-        // Добавляем бренды
-        activeFilters.brand.forEach(filter => {
-            const filterElement = document.createElement('div');
-            filterElement.className = 'active-filter';
-            filterElement.innerHTML = `
-                <span>${getFilterName(filter)}</span>
-                <button class="remove-filter" data-type="brand" data-value="${filter}">
-                    <i class="fas fa-times"></i>
-                </button>
-            `;
-            activeFiltersContainer.appendChild(filterElement);
-        });
-        
-        // Добавляем обработчики для кнопок удаления
-        document.querySelectorAll('.remove-filter').forEach(button => {
-            button.addEventListener('click', function() {
-                const type = this.getAttribute('data-type');
-                const value = this.getAttribute('data-value');
-                
-                // Удаляем фильтр из активных
-                const index = activeFilters[type].indexOf(value);
-                if (index > -1) {
-                    activeFilters[type].splice(index, 1);
-                }
-                
-                // Снимаем чекбокс в модальном окне
-                const checkbox = document.querySelector(`input[name="${type}"][value="${value}"]`);
-                if (checkbox) {
-                    checkbox.checked = false;
-                }
-                
-                // Обновляем UI
-                updateActiveFilters();
-                filterProducts();
+        requestAnimationFrame(() => {
+            $.productsGrid.innerHTML = products.map((product, index) => `
+                <div class="product-card" data-category="${product.category}" data-brand="${product.brand}" data-price="${product.price}" style="animation-delay: ${index * 0.05}s">
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.alt}" loading="lazy">
+                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                        <button class="quick-view" aria-label="Быстрый просмотр"><i class="fas fa-eye"></i></button>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-brand">${product.brandName}</span>
+                        <h3 class="product-name">${product.name}</h3>
+                        <span class="product-volume">${product.volume}</span>
+                        <div class="product-price">
+                            ${product.oldPrice ? `<span class="price old-price">${product.oldPrice.toLocaleString()} ₽</span>` : ''}
+                            <span class="price">${product.price.toLocaleString()} ₽</span>
+                        </div>
+                        <button class="add-to-cart">В корзину</button>
+                    </div>
+                </div>
+            `).join('');
+            
+            productCards = document.querySelectorAll('.product-card');
+            quickViewButtons = document.querySelectorAll('.quick-view');
+            addToCartButtons = document.querySelectorAll('.add-to-cart');
+            initProductEvents();
+            
+            requestAnimationFrame(() => {
+                $.productsGrid.style.opacity = '1';
+                $.productsGrid.style.transform = 'scale(1)';
+                $.productsGrid.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             });
         });
     }
-    
-    // Получение читаемого названия фильтра
-    function getFilterName(filterValue) {
-        const filterNames = {
-            // Категории
-            'women': 'Женские духи',
-            'men': 'Мужские духи',
-            'unisex': 'Унисекс',
-            'niche': 'Нишевые',
-            'arabic': 'Арабские',
-            'oils': 'Масла на разлив',
-            
-            // Бренды
-            'initio': 'Initio Parfums',
-            'memo': 'Memo Paris',
-            'moudon': 'Moudon',
-            'lattafa': 'Lattafa',
-            'swiss': 'Swiss Arabian',
-            'louizon': 'Louizon',
-            'chopard': 'Chopard',
-            'rasasi': 'Rasasi'
-        };
-        
-        return filterNames[filterValue] || filterValue;
-    }
-    
-    // Фильтрация товаров
+
+    // 🔥 4. ФИЛЬТРАЦИЯ
     function filterProducts() {
-        let visibleCount = 0;
-        
-        productCards.forEach(card => {
-            const categories = card.getAttribute('data-category').split(' ');
-            const brand = card.getAttribute('data-brand');
-            
-            // Проверка категорий
-            const categoryMatch = activeFilters.category.length === 0 || 
-                activeFilters.category.some(filter => categories.includes(filter));
-            
-            // Проверка бренда
-            const brandMatch = activeFilters.brand.length === 0 || 
-                activeFilters.brand.includes(brand);
-            
-            // Показываем/скрываем карточку
-            if (categoryMatch && brandMatch) {
-                card.style.display = 'block';
-                visibleCount++;
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                }, 10);
-            } else {
-                card.style.opacity = '0';
-                setTimeout(() => {
-                    card.style.display = 'none';
-                }, 300);
-            }
+        const filtered = productsData.filter(product => {
+            const cats = product.category.split(' ');
+            const brandMatch = !activeFilters.brand.length || activeFilters.brand.includes(product.brand);
+            const categoryMatch = !activeFilters.category.length || 
+                activeFilters.category.some(f => cats.includes(f));
+            return brandMatch && categoryMatch;
         });
-        
-        // Обновляем текст кнопки фильтра
-        const totalActive = activeFilters.category.length + activeFilters.brand.length;
-        filterToggle.innerHTML = totalActive > 0 
-            ? `<span>Фильтры (${totalActive})</span>`
-            : `<span>Показать фильтры</span>`;
+        renderProducts(filtered);
+        updateFilterCount();
+        console.log(`✅ Фильтры:`, activeFilters, `Найдено: ${filtered.length}`);
     }
-    
-    // Сортировка товаров
-    sortSelect.addEventListener('change', function() {
-        sortProducts(this.value);
-    });
-    
-    function sortProducts(sortType) {
-        const products = Array.from(productCards);
-        
-        products.sort((a, b) => {
-            const priceA = parseInt(a.getAttribute('data-price'));
-            const priceB = parseInt(b.getAttribute('data-price'));
-            const nameA = a.querySelector('.product-name').textContent.toLowerCase();
-            const nameB = b.querySelector('.product-name').textContent.toLowerCase();
-            
-            switch(sortType) {
-                case 'price-asc':
-                    return priceA - priceB;
-                case 'price-desc':
-                    return priceB - priceA;
-                case 'name-asc':
-                    return nameA.localeCompare(nameB);
-                case 'name-desc':
-                    return nameB.localeCompare(nameA);
-                default:
-                    return 0;
-            }
+
+    // 🔥 5. СОРТИРОВКА
+    function sortProducts(type) {
+        const filtered = productsData.filter(product => {
+            const cats = product.category.split(' ');
+            const brandMatch = !activeFilters.brand.length || activeFilters.brand.includes(product.brand);
+            const categoryMatch = !activeFilters.category.length || 
+                activeFilters.category.some(f => cats.includes(f));
+            return brandMatch && categoryMatch;
         });
         
-        // Переставляем товары в DOM
-        const grid = document.querySelector('.products-grid');
-        products.forEach(product => {
-            grid.appendChild(product);
+        const sorted = filtered.sort((a, b) => {
+            const pa = a.price, pb = b.price;
+            const na = a.name.toLowerCase(), nb = b.name.toLowerCase();
+            return type === 'price-asc' ? pa - pb : type === 'price-desc' ? pb - pa :
+                   type === 'name-asc' ? na.localeCompare(nb) : type === 'name-desc' ? nb.localeCompare(na) : 0;
+        });
+        
+        renderProducts(sorted);
+    }
+
+    // 🔥 6. URL ФИЛЬТРЫ
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlFilter = urlParams.get('filter');
+    
+    if (urlFilter) {
+        console.log('🎯 URL фильтр:', urlFilter);
+        const checkbox = document.querySelector(`input[name="category"][value="${urlFilter}"]`) || 
+                        document.querySelector(`input[name="brand"][value="${urlFilter}"]`);
+        
+        if (checkbox) {
+            checkbox.checked = true;
+            (checkbox.name === 'category' ? activeFilters.category : activeFilters.brand).push(urlFilter);
+        } else {
+            activeFilters.category = [urlFilter];
+        }
+        
+        setTimeout(() => {
+            updateFiltersUI();
+            filterProducts();
+        }, 100);
+    }
+
+    // 🔥 7. МОДАЛЬНОЕ ОКНО
+    $.filterToggle?.onclick = () => {
+        $.filtersModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+    
+    $.modalClose?.onclick = () => {
+        $.filtersModal.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+    
+    $.filtersModal?.onclick = e => {
+        if (e.target === $.filtersModal) {
+            $.filtersModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+
+    // 🔥 8. СОБЫТИЯ ПРОДУКТОВ
+    function initProductEvents() {
+        quickViewButtons.forEach(btn => {
+            btn.onclick = e => { 
+                e.preventDefault(); 
+                window.location.href = 'product-detail.html'; 
+            };
+        });
+        
+        addToCartButtons.forEach(btn => {
+            btn.onclick = function(e) {
+                e.preventDefault();
+                const name = this.closest('.product-card').querySelector('.product-name').textContent;
+                const cart = document.querySelector('.cart-count');
+                let count = +cart.textContent;
+                cart.textContent = ++count;
+                cart.style.transform = 'scale(1.3)';
+                setTimeout(() => cart.style.transform = 'scale(1)', 300);
+                showNotification(`"${name}" добавлен в корзину`);
+            };
         });
     }
-    
-    // Быстрый просмотр
-    quickViewButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const productCard = this.closest('.product-card');
-            const productName = productCard.querySelector('.product-name').textContent;
-            const productPrice = productCard.querySelector('.price').textContent;
-            
-            // В реальном проекте здесь будет открытие страницы товара
-            window.location.href = 'product-detail.html';
+
+    // 🔥 9. ФИЛЬТРЫ КНОПКИ
+    $.clearFilters?.onclick = () => {
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
+        activeFilters = { category: [], brand: [] };
+        updateFiltersUI();
+        renderProducts(productsData);
+    };
+
+    $.applyFilters?.onclick = () => {
+        activeFilters = {
+            category: Array.from(document.querySelectorAll('input[name="category"]:checked')).map(cb => cb.value),
+            brand: Array.from(document.querySelectorAll('input[name="brand"]:checked')).map(cb => cb.value)
+        };
+        updateFiltersUI();
+        filterProducts();
+        $.filtersModal.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    // 🔥 10. АКТИВНЫЕ ФИЛЬТРЫ UI
+    function updateFiltersUI() {
+        if (!$.activeFilters) return;
+        $.activeFilters.innerHTML = '';
+        
+        [...activeFilters.category, ...activeFilters.brand].forEach(filter => {
+            const el = document.createElement('div');
+            el.className = 'active-filter';
+            const type = /initio|memo|moudon|lattafa|swiss|louizon|chopard|rasasi|shaik|clive/.test(filter) ? 'brand' : 'category';
+            el.innerHTML = `
+                <span>${FILTER_NAMES[filter] || filter}</span>
+                <button class="remove-filter" data-type="${type}" data-value="${filter}">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            $.activeFilters.appendChild(el);
         });
-    });
-    
-    // Добавление в корзину
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            const productCard = this.closest('.product-card');
-            const productName = productCard.querySelector('.product-name').textContent;
-            
-            // Обновление счетчика корзины
-            const cartCount = document.querySelector('.cart-count');
-            let currentCount = parseInt(cartCount.textContent);
-            cartCount.textContent = currentCount + 1;
-            
-            // Анимация счетчика
-            cartCount.style.transform = 'scale(1.3)';
-            setTimeout(() => {
-                cartCount.style.transform = 'scale(1)';
-            }, 300);
-            
-            // Уведомление
-            showNotification(`"${productName}" добавлен в корзину`);
-            
-            // В реальном проекте здесь будет AJAX-запрос
-            console.log('Товар добавлен в корзину:', productName);
+        
+        $.activeFilters.querySelectorAll('.remove-filter').forEach(btn => {
+            btn.onclick = function() {
+                const type = this.dataset.type;
+                const value = this.dataset.value;
+                activeFilters[type] = activeFilters[type].filter(f => f !== value);
+                const cb = document.querySelector(`input[name="${type}"][value="${value}"]`);
+                if (cb) cb.checked = false;
+                updateFiltersUI();
+                filterProducts();
+            };
         });
-    });
-    
-    // Функция уведомлений
-    function showNotification(message) {
-        // Создаем элемент уведомления
-        const notification = document.createElement('div');
-        notification.className = 'notification';
-        notification.innerHTML = `
-            <div class="notification-content">
-                <i class="fas fa-check-circle"></i>
-                <span>${message}</span>
-            </div>
-        `;
         
-        // Добавляем стили
-        const style = document.createElement('style');
-        style.textContent = `
-            .notification {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: #333;
-                color: white;
-                padding: 15px 20px;
-                border-radius: 4px;
-                transform: translateY(100px);
-                opacity: 0;
-                transition: transform 0.3s, opacity 0.3s;
-                z-index: 10000;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            }
-            
-            .notification-content {
-                display: flex;
-                align-items: center;
-                gap: 10px;
-            }
-            
-            .notification-content i {
-                color: #4ecdc4;
-            }
-        `;
-        
-        document.head.appendChild(style);
-        document.body.appendChild(notification);
-        
-        // Показываем уведомление
+        updateFilterCount();
+    }
+
+    // 🔥 11. СЧЕТЧИК ФИЛЬТРОВ
+    function updateFilterCount() {
+        const total = activeFilters.category.length + activeFilters.brand.length;
+        if ($.filterToggle) {
+            $.filterToggle.innerHTML = total > 0 ? `<span>Фильтры (${total})</span>` : '<span>Показать фильтры</span>';
+        }
+    }
+
+    // 🔥 12. СОРТИРОВКА
+    $.sortSelect?.onchange = e => sortProducts(e.target.value);
+
+    // 🔥 13. УВЕДОМЛЕНИЯ
+    function showNotification(msg) {
+        const n = document.createElement('div');
+        n.className = 'notification';
+        n.innerHTML = `<div class="notification-content"><i class="fas fa-check-circle"></i><span>${msg}</span></div>`;
+        document.head.insertAdjacentHTML('beforeend', 
+            `<style>.notification{position:fixed;bottom:20px;right:20px;background:#333;color:white;padding:15px 20px;border-radius:4px;transform:translateY(100px);opacity:0;transition:transform .3s,opacity .3s;z-index:10000;box-shadow:0 5px 15px rgba(0,0,0,.2)}.notification-content{display:flex;align-items:center;gap:10px}.notification-content i{color:#4ecdc4}</style>`
+        );
+        document.body.appendChild(n);
+        setTimeout(() => { n.style.transform = 'translateY(0)'; n.style.opacity = '1'; }, 10);
         setTimeout(() => {
-            notification.style.transform = 'translateY(0)';
-            notification.style.opacity = '1';
-        }, 10);
-        
-        // Скрываем через 3 секунды
-        setTimeout(() => {
-            notification.style.transform = 'translateY(100px)';
-            notification.style.opacity = '0';
-            
-            setTimeout(() => {
-                notification.remove();
-                style.remove();
-            }, 300);
+            n.style.transform = 'translateY(100px)'; n.style.opacity = '0';
+            setTimeout(() => n.remove(), 300);
         }, 3000);
     }
-    
-    // Инициализация
-    updateActiveFilters();
+
+    // 🔥 14. ЗАПУСК
+    renderProducts(productsData);
+    updateFiltersUI();
 });

@@ -1,142 +1,142 @@
 <?php
-// register.php - ЧИСТЫЙ JSON API (PHP 8.5+)
-ob_start();  // ✅ БЛОКИРУЕМ HTML вывод!
+// register.php - Регистрация нового пользователя
+// Версия 2.0 для диплома
 
-header('Content-Type: application/json; charset=utf-8');
+define('DB_ACCESS', true);
+require_once 'config.php';
+
+// Разрешаем CORS
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type');
-header('Access-Control-Allow-Credentials: true');
+header('Content-Type: application/json; charset=utf-8');
 
-function jsonResponse($success, $message, $data = []) {
-    ob_end_clean();  // ✅ Очищаем ВСЕ перед JSON!
-    echo json_encode([
-        'success' => $success,
-        'message' => $message,
-        'data' => $data
-    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-    exit;
-}
-
-// CORS preflight
+// Обработка preflight запроса
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    ob_end_clean();
     http_response_code(200);
     exit;
 }
 
+// Проверяем метод запроса
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    jsonResponse(false, 'Только POST запросы разрешены');
-    exit;
+    sendJSON(['success' => false, 'error' => 'Метод не поддерживается'], 405);
 }
-
-// Получаем JSON данные
-$input = file_get_contents('php://input');
-$data = json_decode($input, true);
-
-if (!$data) {
-    $data = $_POST;  // Fallback для form-data
-}
-
-if (empty($data)) {
-    jsonResponse(false, 'Нет данных для регистрации');
-}
-
-// Валидация обязательных полей
-$required = ['first_name', 'last_name', 'email', 'password', 'confirm_password'];
-foreach ($required as $field) {
-    if (empty($data[$field])) {
-        jsonResponse(false, "Заполните поле: $field");
-    }
-}
-
-// Проверка email
-$email = filter_var(trim($data['email']), FILTER_SANITIZE_EMAIL);
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    jsonResponse(false, 'Неверный формат email');
-}
-
-// Проверка пароля
-if ($data['password'] !== $data['confirm_password']) {
-    jsonResponse(false, 'Пароли не совпадают');
-}
-if (strlen($data['password']) < 6) {
-    jsonResponse(false, 'Пароль должен быть не менее 6 символов');
-}
-
-// Подключение БД (БЕЗ echo!)
-require_once __DIR__ . '/config/database.php';
 
 try {
-    $database = new Database();
-    $db = $database->getConnection();
+    // Получаем данные
+    $input = file_get_contents('php://input');
+    $data = json_decode($input, true);
     
-    // Проверяем дубликат email
-    $checkQuery = "SELECT id FROM users WHERE email = :email";
-    $checkStmt = $db->prepare($checkQuery);
-    $checkStmt->bindParam(':email', $email);
-    $checkStmt->execute();
+    if (!$data) {
+        sendJSON(['success' => false, 'error' => 'Некорректные данные'], 400);
+    }
     
-    if ($checkStmt->rowCount() > 0) {
-        jsonResponse(false, 'Этот email уже зарегистрирован');
+    $name = trim($data['name'] ?? '');
+    $email = trim($data['email'] ?? '');
+    $phone = trim($data['phone'] ?? '');
+    $password = $data['password'] ?? '';
+    $password_confirm = $data['password_confirm'] ?? '';
+    $agree = $data['agree'] ?? false;
+    
+    // Валидация
+    $errors = [];
+    
+    if (empty($name)) {
+        $errors['name'] = 'Имя обязательно';
+    } elseif (strlen($name) < 2) {
+        $errors['name'] = 'Имя должно содержать минимум 2 символа';
+    }
+    
+    if (empty($email)) {
+        $errors['email'] = 'Email обязателен';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = 'Некорректный email';
+    }
+    
+    if (!empty($phone)) {
+        // Очищаем телефон от всего кроме цифр и +
+        $phone = preg_replace('/[^0-9+]/', '', $phone);
+        if (strlen($phone) < 10) {
+            $errors['phone'] = 'Некорректный номер телефона';
+        }
+    }
+    
+    if (empty($password)) {
+        $errors['password'] = 'Пароль обязателен';
+    } elseif (strlen($password) < 6) {
+        $errors['password'] = 'Пароль должен содержать минимум 6 символов';
+    }
+    
+    if ($password !== $password_confirm) {
+        $errors['password_confirm'] = 'Пароли не совпадают';
+    }
+    
+    if (!$agree) {
+        $errors['agree'] = 'Необходимо согласие с условиями';
+    }
+    
+    if (!empty($errors)) {
+        sendJSON(['success' => false, 'errors' => $errors], 422);
+    }
+    
+    // Подключаемся к БД
+    $db = getDB();
+    if (!$db) {
+        sendJSON(['success' => false, 'error' => 'Ошибка подключения к БД'], 500);
+    }
+    
+    // Проверяем, не занят ли email
+    $stmt = $db->prepare("SELECT id FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    
+    if ($stmt->fetch()) {
+        sendJSON(['success' => false, 'errors' => ['email' => 'Email уже зарегистрирован']], 422);
     }
     
     // Хешируем пароль
-    $passwordHash = password_hash($data['password'], PASSWORD_DEFAULT);
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
     
-    // Создаём пользователя
-    $insertQuery = "INSERT INTO users (email, first_name, last_name, password_hash, is_active) 
-                   VALUES (:email, :first_name, :last_name, :password_hash, 1)";
+    // Создаем пользователя
+    $stmt = $db->prepare("INSERT INTO users (name, email, phone, password) VALUES (?, ?, ?, ?)");
+    $success = $stmt->execute([$name, $email, $phone ?: null, $password_hash]);
     
-    $insertStmt = $db->prepare($insertQuery);
-    $insertStmt->bindParam(':email', $email);
-    $insertStmt->bindParam(':first_name', $data['first_name']);
-    $insertStmt->bindParam(':last_name', $data['last_name']);
-    $insertStmt->bindParam(':password_hash', $passwordHash);
-    
-    if (!$insertStmt->execute()) {
-        jsonResponse(false, 'Ошибка при сохранении пользователя');
+    if (!$success) {
+        sendJSON(['success' => false, 'error' => 'Ошибка создания аккаунта'], 500);
     }
     
-    $userId = $db->lastInsertId();
+    $user_id = $db->lastInsertId();
     
-    // Создаём сессию
-    $sessionToken = bin2hex(random_bytes(32));
-    $expiresAt = date('Y-m-d H:i:s', strtotime('+7 days'));
-    $ip = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+    // Автоматически авторизуем пользователя
+    $_SESSION['user_id'] = $user_id;
+    $_SESSION['user_name'] = $name;
+    $_SESSION['user_email'] = $email;
+    $_SESSION['logged_in'] = true;
     
-    $sessionQuery = "INSERT INTO user_sessions (user_id, session_token, ip_address, expires_at) 
-                    VALUES (:user_id, :token, :ip, :expires)";
-    
-    $sessionStmt = $db->prepare($sessionQuery);
-    $sessionStmt->bindParam(':user_id', $userId);
-    $sessionStmt->bindParam(':token', $sessionToken);
-    $sessionStmt->bindParam(':ip', $ip);
-    $sessionStmt->bindParam(':expires', $expiresAt);
-    $sessionStmt->execute();
-    
-    // Устанавливаем cookie
-    setcookie('session_token', $sessionToken, [
-        'expires' => time() + 7 * 24 * 3600,
-        'path' => '/',
-        'secure' => false,  // localhost
-        'httponly' => true,
-        'samesite' => 'Lax'
+    // Создаем сессию в БД
+    $token = bin2hex(random_bytes(32));
+    $stmt = $db->prepare("INSERT INTO sessions (user_id, token, ip_address, user_agent, expires_at) 
+                         VALUES (?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL 30 DAY))");
+    $stmt->execute([
+        $user_id,
+        $token,
+        $_SERVER['REMOTE_ADDR'] ?? null,
+        $_SERVER['HTTP_USER_AGENT'] ?? null
     ]);
     
-    // ✅ УСПЕХ!
-    jsonResponse(true, 'Регистрация успешна!', [
+    sendJSON([
+        'success' => true,
+        'message' => 'Регистрация успешна! Добро пожаловать!',
         'user' => [
-            'id' => $userId,
+            'id' => $user_id,
+            'name' => $name,
             'email' => $email,
-            'first_name' => $data['first_name'],
-            'last_name' => $data['last_name']
+            'phone' => $phone
         ],
-        'redirect' => '/account/'
-    ]);
+        'redirect' => './account.html'
+    ], 201);
     
 } catch (Exception $e) {
-    error_log("Register error: " . $e->getMessage());  // Только в лог!
-    jsonResponse(false, 'Ошибка сервера. Попробуйте позже.');
+    error_log("Register error: " . $e->getMessage());
+    sendJSON(['success' => false, 'error' => 'Внутренняя ошибка сервера'], 500);
 }
 ?>

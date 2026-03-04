@@ -1,85 +1,27 @@
 <?php
 // logout.php - Выход из системы
-header('Content-Type: application/json');
-session_start();
+define('DB_ACCESS', true);
+require_once 'config.php';
 
-require_once __DIR__ . '/config/database.php';
+header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
 
-class Logout {
-    private $db;
-    
-    public function __construct() {
-        $database = new Database();
-        $this->db = $database->getConnection();
-    }
-    
-    // Завершение сессии
-    public function logoutUser($token) {
-        if (empty($token)) {
-            return true;
-        }
-        
-        try {
-            // Удаляем сессию из БД
-            $query = "DELETE FROM user_sessions WHERE session_token = :token";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':token', $token);
-            $stmt->execute();
-            
-            // Очищаем сессию PHP
-            session_destroy();
-            
-            return true;
-            
-        } catch (Exception $e) {
-            error_log("Logout error: " . $e->getMessage());
-            return false;
-        }
+// Удаляем сессию из БД
+if (isset($_SESSION['user_id'])) {
+    $db = getDB();
+    if ($db) {
+        $stmt = $db->prepare("DELETE FROM sessions WHERE user_id = ?");
+        $stmt->execute([$_SESSION['user_id']]);
     }
 }
 
-// Обработка запроса
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $logout = new Logout();
-    
-    // Получаем токен из cookie
-    $token = $_COOKIE['session_token'] ?? '';
-    
-    // Удаляем cookie
-    setcookie('session_token', '', [
-        'expires' => time() - 3600,
-        'path' => '/',
-        'secure' => true,
-        'httponly' => true,
-        'samesite' => 'Strict'
-    ]);
-    
-    // Завершаем сессию
-    $success = $logout->logoutUser($token);
-    
-    echo json_encode([
-        'success' => $success,
-        'message' => 'Выход выполнен успешно',
-        'redirect' => '../index.html'
-    ]);
-    
-} else {
-    // Если запрос GET - редирект
-    $token = $_COOKIE['session_token'] ?? '';
-    
-    if (!empty($token)) {
-        $logout = new Logout();
-        $logout->logoutUser($token);
-    }
-    
-    // Очищаем cookie
-    setcookie('session_token', '', [
-        'expires' => time() - 3600,
-        'path' => '/'
-    ]);
-    
-    // Редирект на главную
-    header('Location: ../index.html');
-    exit;
-}
+// Очищаем сессию
+session_unset();
+session_destroy();
+
+sendJSON([
+    'success' => true,
+    'message' => 'Выход выполнен успешно',
+    'redirect' => './index.html'
+]);
 ?>

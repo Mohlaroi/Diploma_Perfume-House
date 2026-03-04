@@ -2,7 +2,7 @@
 
 // Базовый URL для API запросов (определяем автоматически)
 
-const API_BASE = './php/';
+const API_BASE = './';
 console.log('🔗 API_BASE:', API_BASE);
 
 // Основная инициализация

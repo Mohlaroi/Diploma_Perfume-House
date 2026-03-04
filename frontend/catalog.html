@@ -12,7 +12,9 @@
     <meta property="og:image" content="images/catalog-hero.jpg">
     <meta property="og:type" content="website">
     
-    <!-- Шрифты -->
+    <!-- Шрифты + Иконки -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@300;400;500&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
@@ -21,91 +23,19 @@
 </head>
 <body>
     <!-- Верхняя панель -->
-    <div class="top-bar">
-        <div class="container">
-            <p>Зарегистрируйтесь, чтобы получать новости о распродажах и новых поступлениях</p>
-            <button class="close-top-bar" aria-label="Закрыть">&times;</button>
-        </div>
-    </div>
-
-    <!-- Основная шапка -->
-    <header class="main-header">
-        <div class="container">
-            <!-- Логотип -->
-            <div class="logo">
-                <a href="index.html">
-                    <img src="images/logo.png" alt="Дом Парфюмерии" width="150">
-                </a>
-            </div>
-
-            <!-- Навигация -->
-            <nav class="main-nav">
-                <ul class="nav-menu">
-                    <li class="menu-item dropdown">
-                        <a href="catalog.html" class="nav-link active">Каталог <i class="fas fa-chevron-down"></i></a>
-                        <div class="dropdown-menu">
-                            <div class="dropdown-column">
-                                <h4>По типу</h4>
-                                <a href="#" class="catalog-filter" data-filter="women">Женские духи</a>
-                                <a href="#" class="catalog-filter" data-filter="men">Мужские духи</a>
-                                <a href="#" class="catalog-filter" data-filter="unisex">Унисекс</a>
-                            </div>
-                            <div class="dropdown-column">
-                                <h4>По категориям</h4>
-                                <a href="#" class="catalog-filter" data-filter="niche">Нишевые</a>
-                                <a href="#" class="catalog-filter" data-filter="arabic">Арабские</a>
-                                <a href="#" class="catalog-filter" data-filter="oils">Масла на разлив</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="about.html" class="nav-link">О нас</a></li>
-                    <li><a href="blog.html" class="nav-link">Блог</a></li>
-                    <li><a href="contacts.html" class="nav-link">Контакты</a></li>
-                    <li><a href="wholesale.html" class="nav-link">Оптовикам</a></li>
-                </ul>
-            </nav>
-
-            <!-- Иконки -->
-            <div class="header-actions">
-                <a href="#" class="action-icon search-icon" aria-label="Поиск">
-                    <i class="fas fa-search"></i>
-                </a>
-                <a href="account.html" class="action-icon user-icon" aria-label="Личный кабинет">
-                    <i class="fas fa-user"></i>
-                </a>
-                <a href="cart.html" class="action-icon cart-icon" aria-label="Корзина">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-count">3</span>
-                </a>
-            </div>
-
-            <!-- Мобильное меню -->
-            <button class="mobile-menu-toggle" aria-label="Меню">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
+    <div id="header-placeholder">Загрузка навигации...</div>
 
     <!-- Основное содержание -->
     <main class="catalog-main">
         <div class="container">
-            <!-- Заголовок и управление -->
+            <!-- Заголовок -->
             <div class="catalog-header">
                 <div class="breadcrumbs">
-                    <a href="index.html">Главная</a>
-                    <span>/</span>
-                    <span class="current">Каталог</span>
+                    <a href="index.html">Главная</a><span>/</span><span class="current">Каталог</span>
                 </div>
-                
                 <h1 class="catalog-title">Товары</h1>
-                
                 <div class="catalog-controls">
-                    <button class="filter-toggle" id="filterToggle">
-                        <span>Показать фильтры</span>
-                    </button>
-                    
+                    <button class="filter-toggle" id="filterToggle"><span>Показать фильтры</span></button>
                     <div class="sort-control">
                         <select id="sortSelect" class="sort-select">
                             <option value="featured">По умолчанию</option>
@@ -118,100 +48,90 @@
                 </div>
             </div>
 
-            <!-- Панель активных фильтров -->
-            <div class="active-filters" id="activeFilters">
-                <!-- Активные фильтры будут добавляться динамически -->
-            </div>
+            <!-- Активные фильтры -->
+            <div class="active-filters" id="activeFilters"></div>
 
-            <!-- Основной контент -->
+            <!-- Контент -->
             <div class="catalog-content">
-                <!-- Модальное окно фильтров -->
+                <!-- Модальные фильтры -->
                 <div class="filters-modal" id="filtersModal">
                     <div class="modal-overlay"></div>
                     <div class="modal-content">
                         <div class="modal-header">
                             <h3>Фильтры</h3>
-                            <button class="modal-close" id="modalClose">
-                                <i class="fas fa-times"></i>
-                            </button>
+                            <button class="modal-close" id="modalClose"><i class="fas fa-times"></i></button>
                         </div>
-                        
                         <div class="modal-body">
-                            <!-- Фильтр по категориям -->
+                            <!-- Категории -->
                             <div class="filter-group">
                                 <h4>Категории</h4>
                                 <div class="filter-options">
                                     <label class="filter-option">
-                                        <input type="checkbox" name="category" value="women">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Женские духи</span>
+                                        <input type="checkbox" name="category" value="women"><span class="checkmark"></span><span class="option-text">Женские духи</span>
                                     </label>
                                     <label class="filter-option">
-                                        <input type="checkbox" name="category" value="men">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Мужские духи</span>
+                                        <input type="checkbox" name="category" value="men"><span class="checkmark"></span><span class="option-text">Мужские духи</span>
                                     </label>
                                     <label class="filter-option">
-                                        <input type="checkbox" name="category" value="unisex">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Унисекс</span>
+                                        <input type="checkbox" name="category" value="unisex"><span class="checkmark"></span><span class="option-text">Унисекс</span>
                                     </label>
                                     <label class="filter-option">
-                                        <input type="checkbox" name="category" value="niche">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Нишевые</span>
+                                        <input type="checkbox" name="category" value="niche"><span class="checkmark"></span><span class="option-text">Нишевые</span>
                                     </label>
                                     <label class="filter-option">
-                                        <input type="checkbox" name="category" value="arabic">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Арабские</span>
+                                        <input type="checkbox" name="category" value="arabic"><span class="checkmark"></span><span class="option-text">Арабские</span>
                                     </label>
                                     <label class="filter-option">
-                                        <input type="checkbox" name="category" value="oils">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Масла на разлив</span>
+                                        <input type="checkbox" name="category" value="oils"><span class="checkmark"></span><span class="option-text">Масла на разлив</span>
                                     </label>
                                 </div>
                             </div>
                             
-                            <!-- Фильтр по брендам -->
+                            <!-- Бренды -->
                             <div class="filter-group">
                                 <h4>Бренды</h4>
                                 <div class="filter-options">
                                     <label class="filter-option">
-                                        <input type="checkbox" name="brand" value="initio">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Initio Parfums</span>
+                                        <input type="checkbox" name="brand" value="initio"><span class="checkmark"></span><span class="option-text">Initio Parfums</span>
                                     </label>
                                     <label class="filter-option">
-                                        <input type="checkbox" name="brand" value="memo">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Memo Paris</span>
+                                        <input type="checkbox" name="brand" value="memo"><span class="checkmark"></span><span class="option-text">Memo Paris</span>
                                     </label>
                                     <label class="filter-option">
-                                        <input type="checkbox" name="brand" value="moudon">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Moudon</span>
+                                        <input type="checkbox" name="brand" value="moudon"><span class="checkmark"></span><span class="option-text">Moudon</span>
                                     </label>
                                     <label class="filter-option">
-                                        <input type="checkbox" name="brand" value="lattafa">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Lattafa</span>
+                                        <input type="checkbox" name="brand" value="lattafa"><span class="checkmark"></span><span class="option-text">Lattafa</span>
                                     </label>
                                     <label class="filter-option">
-                                        <input type="checkbox" name="brand" value="swiss">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Swiss Arabian</span>
+                                        <input type="checkbox" name="brand" value="swiss"><span class="checkmark"></span><span class="option-text">Swiss Arabian</span>
                                     </label>
                                     <label class="filter-option">
-                                        <input type="checkbox" name="brand" value="louizon">
-                                        <span class="checkmark"></span>
-                                        <span class="option-text">Louizon</span>
+                                        <input type="checkbox" name="brand" value="louizon"><span class="checkmark"></span><span class="option-text">Louizon</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="brand" value="chopard"><span class="checkmark"></span><span class="option-text">Chopard</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="brand" value="rasasi"><span class="checkmark"></span><span class="option-text">Rasasi</span>
                                     </label>
                                 </div>
                             </div>
+                            <div class="filter-group">
+                                <h4>Спецпредложения</h4>
+                                <div class="filter-options">
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="category" value="new"><span class="checkmark"></span><span class="option-text">Новинки</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="category" value="bestseller"><span class="checkmark"></span><span class="option-text">Хиты продаж</span>
+                                    </label>
+                                    <label class="filter-option">
+                                        <input type="checkbox" name="category" value="sale"><span class="checkmark"></span><span class="option-text">Распродажа</span>
+                                    </label>                  
+                                </div>
+                            </div>                            
                         </div>
-                        
                         <div class="modal-footer">
                             <button class="btn-clear" id="clearFilters">Очистить все</button>
                             <button class="btn-apply" id="applyFilters">Применить фильтры</button>
@@ -219,258 +139,20 @@
                     </div>
                 </div>
 
-                <!-- Сетка товаров -->
-                <div class="products-grid">
-                    <!-- Товар 1 -->
-                    <div class="product-card" data-category="women niche new" data-brand="initio" data-price="18900">
-                        <div class="product-image">
-                            <img src="images/products/initio-psychedelic.jpg" alt="Initio Psychedelic Love" loading="lazy">
-                            <span class="product-badge">Новинка</span>
-                            <button class="quick-view" aria-label="Быстрый просмотр">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-brand">INITIO PARFUMS</span>
-                            <h3 class="product-name">Psychedelic Love</h3>
-                            <span class="product-volume">Extraît de Parfum - 50 ml</span>
-                            <div class="product-price">
-                                <span class="price">18 900 ₽</span>
-                            </div>
-                            <button class="add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <!-- Товар 2 -->
-                    <div class="product-card" data-category="men niche" data-brand="memo" data-price="15600">
-                        <div class="product-image">
-                            <img src="images/products/memo-irish.jpg" alt="Memo Irish Leather" loading="lazy">
-                            <button class="quick-view" aria-label="Быстрый просмотр">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-brand">MEMO PARIS</span>
-                            <h3 class="product-name">Irish Leather</h3>
-                            <span class="product-volume">Extraît de Parfum - 75 ml</span>
-                            <div class="product-price">
-                                <span class="price">15 600 ₽</span>
-                            </div>
-                            <button class="add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <!-- Товар 3 -->
-                    <div class="product-card" data-category="arabic unisex bestseller" data-brand="lattafa" data-price="3200">
-                        <div class="product-image">
-                            <img src="images/products/lattafa-khamrah.jpg" alt="Lattafa Khamrah" loading="lazy">
-                            <span class="product-badge">Хит</span>
-                            <button class="quick-view" aria-label="Быстрый просмотр">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-brand">LATTAFA</span>
-                            <h3 class="product-name">Khamrah</h3>
-                            <span class="product-volume">Eau de Parfum - 100 ml</span>
-                            <div class="product-price">
-                                <span class="price">3 200 ₽</span>
-                            </div>
-                            <button class="add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <!-- Товар 4 -->
-                    <div class="product-card" data-category="oils unisex" data-brand="louizon" data-price="1800">
-                        <div class="product-image">
-                            <img src="images/products/louizon-rose.jpg" alt="Louizon Rose Noire" loading="lazy">
-                            <span class="product-badge">Распродажа</span>
-                            <button class="quick-view" aria-label="Быстрый просмотр">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-brand">LOUIZON</span>
-                            <h3 class="product-name">Rose Noire</h3>
-                            <span class="product-volume">Масляные духи - 12 ml</span>
-                            <div class="product-price">
-                                <span class="price old-price">2 250 ₽</span>
-                                <span class="price">1 800 ₽</span>
-                            </div>
-                            <button class="add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <!-- Товар 5 -->
-                    <div class="product-card" data-category="women niche new" data-brand="moudon" data-price="12400">
-                        <div class="product-image">
-                            <img src="images/products/moudon-vanille.jpg" alt="Moudon Vanille Exquise" loading="lazy">
-                            <span class="product-badge">Новинка</span>
-                            <button class="quick-view" aria-label="Быстрый просмотр">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-brand">MOUDON</span>
-                            <h3 class="product-name">Vanille Exquise</h3>
-                            <span class="product-volume">Extraît de Parfum - 50 ml</span>
-                            <div class="product-price">
-                                <span class="price">12 400 ₽</span>
-                            </div>
-                            <button class="add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <!-- Товар 6 -->
-                    <div class="product-card" data-category="arabic men" data-brand="swiss" data-price="2800">
-                        <div class="product-image">
-                            <img src="images/products/swiss-shaghaf.jpg" alt="Swiss Arabian Shaghaf" loading="lazy">
-                            <button class="quick-view" aria-label="Быстрый просмотр">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-brand">SWISS ARABIAN</span>
-                            <h3 class="product-name">Shaghaf</h3>
-                            <span class="product-volume">Eau de Parfum - 100 ml</span>
-                            <div class="product-price">
-                                <span class="price">2 800 ₽</span>
-                            </div>
-                            <button class="add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <!-- Товар 7 -->
-                    <div class="product-card" data-category="unisex niche" data-brand="chopard" data-price="9800">
-                        <div class="product-image">
-                            <img src="images/products/chopard-oud.jpg" alt="Chopard Oud Malaki" loading="lazy">
-                            <button class="quick-view" aria-label="Быстрый просмотр">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-brand">CHOPARD</span>
-                            <h3 class="product-name">Oud Malaki</h3>
-                            <span class="product-volume">Eau de Parfum - 50 ml</span>
-                            <div class="product-price">
-                                <span class="price">9 800 ₽</span>
-                            </div>
-                            <button class="add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <!-- Товар 8 -->
-                    <div class="product-card" data-category="arabic women bestseller" data-brand="rasasi" data-price="3500">
-                        <div class="product-image">
-                            <img src="images/products/rasasi-hawas.jpg" alt="Rasasi Hawas" loading="lazy">
-                            <span class="product-badge">Хит</span>
-                            <button class="quick-view" aria-label="Быстрый просмотр">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-brand">RASASI</span>
-                            <h3 class="product-name">Hawas</h3>
-                            <span class="product-volume">Eau de Parfum - 100 ml</span>
-                            <div class="product-price">
-                                <span class="price">3 500 ₽</span>
-                            </div>
-                            <button class="add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <!-- Товар 9 -->
-                    <div class="product-card" data-category="oils women" data-brand="louizon" data-price="2100">
-                        <div class="product-image">
-                            <img src="images/products/louizon-amber.jpg" alt="Louizon Ambre Royale" loading="lazy">
-                            <button class="quick-view" aria-label="Быстрый просмотр">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-brand">LOUIZON</span>
-                            <h3 class="product-name">Ambre Royale</h3>
-                            <span class="product-volume">Масляные духи - 12 ml</span>
-                            <div class="product-price">
-                                <span class="price">2 100 ₽</span>
-                            </div>
-                            <button class="add-to-cart">В корзину</button>
-                        </div>
-                    </div>
-
-                    <!-- Товар 10 -->
-                    <div class="product-card" data-category="men niche" data-brand="initio" data-price="17600">
-                        <div class="product-image">
-                            <img src="images/products/initio-musk.jpg" alt="Initio Musk Therapy" loading="lazy">
-                            <button class="quick-view" aria-label="Быстрый просмотр">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <div class="product-info">
-                            <span class="product-brand">INITIO PARFUMS</span>
-                            <h3 class="product-name">Musk Therapy</h3>
-                            <span class="product-volume">Extraît de Parfum - 50 ml</span>
-                            <div class="product-price">
-                                <span class="price">17 600 ₽</span>
-                            </div>
-                            <button class="add-to-cart">В корзину</button>
-                        </div>
-                    </div>
+                <!-- 🔥 ТОВАРЫ ГЕНЕРИРУЮТСЯ JS (catalog.js) 🔥 -->
+                <div class="products-grid" id="productsGrid">
+                    <!-- Товары будут загружены динамически -->
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Подвал -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="images/logo-white.png" alt="Дом Парфюмерии" width="120">
-                    <p class="tagline">Место, где ароматы обретают голос</p>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Магазин</h4>
-                        <a href="#women">Женские духи</a>
-                        <a href="#men">Мужские духи</a>
-                        <a href="#unisex">Унисекс</a>
-                        <a href="#arabic">Арабские духи</a>
-                        <a href="#oils">Масла на разлив</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Информация</h4>
-                        <a href="about.html">О нас</a>
-                        <a href="blog.html">Блог</a>
-                        <a href="contacts.html">Контакты</a>
-                        <a href="delivery.html">Доставка и оплата</a>
-                        <a href="guarantee.html">Гарантии</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Контакты</h4>
-                        <p><i class="fas fa-map-marker-alt"></i> ул. Люльшенко, 19/4</p>
-                        <p><i class="fas fa-map-marker-alt"></i> пр. Соколова, 52А</p>
-                        <p><i class="fas fa-map-marker-alt"></i> пр. Космонавтов, 2/2</p>
-                        <p><i class="fas fa-phone"></i> +7 (938) 105-00-16</p>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Подписка</h4>
-                        <p>Узнавайте первыми о новинках и акциях</p>
-                        <form class="subscribe-form">
-                            <input type="email" placeholder="Ваш email" required>
-                            <button type="submit">Подписаться</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Дом Парфюмерии. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Футер -->
+    <div id="footer-placeholder">Загрузка футера...</div>
 
-    <!-- Скрипты -->
-    <script src="js/main.js"></script>
-    <script src="js/catalog.js"></script>
+    <!-- Скрипты (defer для скорости) -->
+    <script src="js/main.js" defer></script>
+    <script src="js/catalog.js" defer></script>
+    <script src="js/include.js"></script>
 </body>
 </html>

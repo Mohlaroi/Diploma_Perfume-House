@@ -1,0 +1,61 @@
+<!-- Верхняя панель -->
+<div class="top-bar">
+    <div class="container">
+        <p>Зарегистрируйтесь, чтобы получать последние новости о распродажах, новых поступлениях и многое другое</p>
+        <button class="close-top-bar" aria-label="Закрыть">&times;</button>
+    </div>
+</div>
+
+<!-- Шапка -->
+<header class="main-header">
+    <div class="container">
+        <div class="logo">
+            <a href="index.html">
+                <img src="images/logo.png" alt="Дом Парфюмерии" width="150">
+            </a>
+        </div>
+
+        <nav class="main-nav">
+            <ul class="nav-menu">
+                <li class="menu-item dropdown">
+                    <a href="#" class="nav-link">Каталог <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-column">
+                            <h4>По типу</h4>
+                            <a href="catalog.html?filter=women" data-filter="women">Женские духи</a>
+                            <a href="catalog.html?filter=men" data-filter="men">Мужские духи</a>
+                            <a href="catalog.html?filter=unisex" data-filter="unisex">Унисекс</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>По категориям</h4>
+                            <a href="catalog.html?filter=niche" data-filter="niche">Нишевые</a>
+                            <a href="catalog.html?filter=arabic" data-filter="arabic">Арабские</a>
+                            <a href="catalog.html?filter=oils" data-filter="oils">Масла</a>
+                        </div>
+                        <div class="dropdown-column">
+                            <h4>Спецпредложения</h4>
+                            <a href="catalog.html?filter=new" data-filter="new">Новинки</a>
+                            <a href="catalog.html?filter=bestseller" data-filter="bestseller">Хиты продаж</a>
+                            <a href="catalog.html?filter=sale" data-filter="sale">Распродажа</a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="about.html" class="nav-link">О нас</a></li>
+                <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                <li><a href="wholesale.html" class="nav-link">Оптовикам</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="tel:+79001331616" class="action-icon phone-icon" aria-label="Позвонить"><i class="fas fa-phone"></i></a>
+            <a href="auth/login.html" class="action-icon user-icon" aria-label="Личный кабинет"><i class="fas fa-user"></i></a>
+            <a href="cart.html" class="action-icon cart-icon" aria-label="Корзина">
+                <i class="fas fa-shopping-bag"></i><span class="cart-count">0</span>
+            </a>
+        </div>
+
+        <button class="mobile-menu-toggle" aria-label="Меню">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</header>

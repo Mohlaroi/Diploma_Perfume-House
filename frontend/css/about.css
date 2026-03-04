@@ -1,6 +1,4 @@
-/* Стили для страницы "О нас" */
-
-/* Герой-секция страницы */
+/* about.css — ТОЛЬКО уникальные стили about.html */
 .page-hero {
     position: relative;
     height: 70vh;
@@ -57,26 +55,18 @@
     color: #fff;
     font-size: 1.5rem;
     animation: bounce 2s infinite;
+    cursor: pointer;
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
-    40% {transform: translateX(-50%) translateY(-10px);}
-    60% {transform: translateX(-50%) translateY(-5px);}
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-10px); }
+    60% { transform: translateX(-50%) translateY(-5px); }
 }
 
-/* Основные секции */
-.about-section {
-    padding: 100px 0;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
+.about-section { padding: var(--spacing-lg) 0; }
 
-.about-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
+.wide-section .container { max-width: 1200px; }
 
 .section-content {
     display: grid;
@@ -85,13 +75,8 @@
     align-items: center;
 }
 
-.section-content.reversed {
-    direction: rtl;
-}
-
-.section-content.reversed > * {
-    direction: ltr;
-}
+.section-content.reversed { direction: rtl; }
+.section-content.reversed > * { direction: ltr; }
 
 .section-text h2 {
     font-family: 'Cormorant Garamond', serif;
@@ -101,28 +86,8 @@
     line-height: 1.2;
 }
 
-.section-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #555;
-    margin-bottom: 20px;
-}
-
-.section-image img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-    transition: transform 0.5s ease;
-}
-
-.section-image img:hover {
-    transform: scale(1.02);
-}
-
-/* Цитата */
 blockquote {
-    border-left: 3px solid #b8860b;
+    border-left: 3px solid var(--primary-gold);
     padding-left: 30px;
     margin: 40px 0;
     font-style: italic;
@@ -139,7 +104,6 @@ cite {
     color: #666;
 }
 
-/* Философия */
 .section-header {
     text-align: center;
     margin-bottom: 70px;
@@ -150,13 +114,6 @@ cite {
     font-size: 3rem;
     font-weight: 400;
     margin-bottom: 15px;
-}
-
-.section-intro {
-    font-size: 1.2rem;
-    color: #777;
-    max-width: 600px;
-    margin: 0 auto;
 }
 
 .philosophy-grid {
@@ -182,7 +139,7 @@ cite {
 
 .card-icon {
     font-size: 2.5rem;
-    color: #b8860b;
+    color: var(--primary-gold);
     margin-bottom: 25px;
 }
 
@@ -193,17 +150,7 @@ cite {
     margin-bottom: 20px;
 }
 
-.philosophy-card p {
-    font-size: 1rem;
-    line-height: 1.7;
-    color: #666;
-}
-
-/* Ассортимент */
-.assortment-content {
-    max-width: 1000px;
-    margin: 0 auto;
-}
+.assortment-content { max-width: 1000px; margin: 0 auto; }
 
 .assortment-item {
     display: grid;
@@ -213,17 +160,8 @@ cite {
     margin-bottom: 100px;
 }
 
-.assortment-item:last-child {
-    margin-bottom: 0;
-}
-
-.assortment-item.reversed {
-    direction: rtl;
-}
-
-.assortment-item.reversed > * {
-    direction: ltr;
-}
+.assortment-item.reversed { direction: rtl; }
+.assortment-item.reversed > * { direction: ltr; }
 
 .item-image img {
     width: 100%;
@@ -239,23 +177,12 @@ cite {
     margin-bottom: 20px;
 }
 
-.item-text p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #555;
-}
+.item-text strong { color: var(--primary-gold); font-weight: 500; }
 
-.item-text strong {
-    color: #b8860b;
-    font-weight: 500;
-}
-
-/* Магазины */
 .locations-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
-    margin-top: 50px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-sm);
 }
 
 .location-card {
@@ -266,14 +193,9 @@ cite {
     transition: transform 0.3s ease;
 }
 
-.location-card:hover {
-    transform: translateY(-5px);
-}
+.location-card:hover { transform: translateY(-5px); }
 
-.location-image {
-    height: 250px;
-    overflow: hidden;
-}
+.location-image { height: 250px; overflow: hidden; }
 
 .location-image img {
     width: 100%;
@@ -282,13 +204,9 @@ cite {
     transition: transform 0.5s ease;
 }
 
-.location-card:hover .location-image img {
-    transform: scale(1.05);
-}
+.location-card:hover .location-image img { transform: scale(1.05); }
 
-.location-info {
-    padding: 30px;
-}
+.location-info { padding: 30px; }
 
 .location-info h3 {
     font-family: 'Cormorant Garamond', serif;
@@ -306,19 +224,9 @@ cite {
     font-size: 0.95rem;
 }
 
-.address i, .hours i {
-    color: #b8860b;
-}
+.address i, .hours i { color: var(--primary-gold); }
 
-.description {
-    margin: 15px 0;
-    line-height: 1.6;
-    color: #555;
-}
-
-/* Призыв к действию */
 .cta-section {
-    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), url('../images/cta-bg.jpg');
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -326,20 +234,16 @@ cite {
     padding: 120px 0;
 }
 
+.cta-content {
+    background: rgba(30,53,80);
+    padding: 72px 0;
+}
+
 .cta-content h2 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 3.5rem;
     font-weight: 400;
     margin-bottom: 20px;
-}
-
-.cta-content p {
-    font-size: 1.2rem;
-    opacity: 0.9;
-    margin-bottom: 40px;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .cta-buttons {
@@ -357,139 +261,25 @@ cite {
     font-weight: 500;
     letter-spacing: 1px;
     transition: all 0.3s ease;
-    display: inline-block;
 }
 
-.cta-button.primary {
-    background: #fff;
-    color: #000;
-}
+.cta-button.primary { background: #fff; color: #000; }
 
-.cta-button.primary:hover {
-    background: transparent;
-    color: #fff;
-}
+.cta-button.primary:hover { background: transparent; color: #fff; }
 
-.cta-button.secondary:hover {
-    background: #fff;
-    color: #000;
-}
+.cta-button.secondary:hover { background: #fff; color: #000; }
 
-/* Кнопка "Наверх" */
-.scroll-to-top {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: #b8860b;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    z-index: 1000;
-    transition: opacity 0.3s, transform 0.3s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.scroll-to-top.visible {
-    display: flex;
-}
-
-.scroll-to-top:hover {
-    background: #a07609;
-    transform: translateY(-3px);
-}
-
-/* Закреплённая навигация */
-.main-header.sticky {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    z-index: 1000;
-    animation: slideDown 0.3s ease;
-}
-
-@keyframes slideDown {
-    from {transform: translateY(-100%);}
-    to {transform: translateY(0);}
-}
-
-/* Адаптивность */
+/* Адаптив about */
 @media (max-width: 1024px) {
-    .philosophy-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .locations-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .page-title {
-        font-size: 3.5rem;
-    }
+    .philosophy-grid, .locations-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 768px) {
-    .section-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-    }
-    
-    .philosophy-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .assortment-item {
-        grid-template-columns: 1fr;
-        margin-bottom: 60px;
-    }
-    
-    .assortment-item.reversed {
-        direction: ltr;
-    }
-    
-    .page-title {
-        font-size: 2.8rem;
-    }
-    
-    .section-text h2 {
-        font-size: 2.2rem;
-    }
-    
-    .cta-content h2 {
-        font-size: 2.5rem;
-    }
-    
-    .cta-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
+    .section-content, .assortment-item { grid-template-columns: 1fr; }
+    .philosophy-grid, .locations-grid { grid-template-columns: 1fr; }
+    .cta-buttons { flex-direction: column; align-items: center; }
 }
 
 @media (max-width: 480px) {
-    .page-hero {
-        height: 60vh;
-        min-height: 400px;
-    }
-    
-    .page-title {
-        font-size: 2.2rem;
-    }
-    
-    .page-subtitle {
-        font-size: 1rem;
-    }
-    
-    .about-section {
-        padding: 60px 0;
-    }
+    .page-hero { height: 60vh; min-height: 400px; }
 }

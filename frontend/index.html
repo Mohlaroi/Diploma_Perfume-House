@@ -12,243 +12,150 @@
     <meta property="og:image" content="images/slide1.jpg">
     <meta property="og:type" content="website">
     
-    <!-- Шрифты -->
+    <!-- Шрифты + preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400&display=swap">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    
-    <!-- Font Awesome для иконок -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
-    <!-- Верхняя панель с акцией -->
-    <div class="top-bar">
-        <div class="container">
-            <p>Зарегистрируйтесь, чтобы получать последние новости о распродажах, новых поступлениях и многое другое</p>
-            <button class="close-top-bar" aria-label="Закрыть">&times;</button>
-        </div>
-    </div>
+    <!-- Верхняя панель -->
+    <div id="header-placeholder">Загрузка навигации...</div>
 
-    <!-- Основная шапка -->
-    <header class="main-header">
-        <div class="container">
-            <!-- Логотип -->
-            <div class="logo">
-                <a href="/">
-                    <img src="images/logo.png" alt="Дом Парфюмерии" width="150">
-                </a>
-            </div>
-
-            <!-- Основная навигация -->
-            <nav class="main-nav">
-                <ul class="nav-menu">
-                    <li class="menu-item dropdown">
-                        <a href="#" class="nav-link">Каталог <i class="fas fa-chevron-down"></i></a>
-                        <div class="dropdown-menu">
-                            <div class="dropdown-column">
-                                <h4>По типу</h4>
-                                <a href="#">Женские духи</a>
-                                <a href="#">Мужские духи</a>
-                                <a href="#">Унисекс</a>
-                            </div>
-                            <div class="dropdown-column">
-                                <h4>По брендам</h4>
-                                <a href="#">Нишевые</a>
-                                <a href="#">Арабские</a>
-                                <a href="#">На разлив</a>
-                            </div>
-                            <div class="dropdown-column">
-                                <h4>Спецпредложения</h4>
-                                <a href="#">Новинки</a>
-                                <a href="#">Хиты продаж</a>
-                                <a href="#">Распродажа</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="about.html" class="nav-link">О нас</a></li>
-                    <li><a href="contacts.html" class="nav-link">Контакты</a></li>
-                    <li><a href="blog.html" class="nav-link">Блог</a></li>
-                    <li><a href="wholesale.html" class="nav-link">Оптовикам</a></li>
-                </ul>
-            </nav>
-
-            <!-- Иконки правой части -->
-            <div class="header-actions">
-                <a href="#" class="action-icon search-icon" aria-label="Поиск">
-                    <i class="fas fa-search"></i>
-                </a>
-                <a href="auth/login.html" class="action-icon user-icon" aria-label="Личный кабинет">
-                    <i class="fas fa-user"></i>
-                </a>
-                <a href="cart.html" class="action-icon cart-icon" aria-label="Корзина">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-count">0</span>
-                </a>
-            </div>
-
-            <!-- Мобильное меню -->
-            <button class="mobile-menu-toggle" aria-label="Меню">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
-
-    <!-- Слайдер/Герой-секция -->
-    <section class="hero-slider">
+    <!-- Hero слайдер -->
+    <section class="hero-slider moudon-slider">
         <div class="hero-slide active">
-            <!-- Замените на ваше изображение -->
             <div class="slide-image" style="background-image: url('images/slide1.png');"></div>
+            <div class="slide-overlay"></div>
             <div class="slide-content">
                 <div class="container">
-                    <h1 class="slide-title">ДОМ ПАРФЮМЕРИИ</h1>
-                    <p class="slide-subtitle">EXTRAIT DE PARFUM</p>
-                    <a href="#collections" class="cta-button">ПОСМОТРЕТЬ КОЛЛЕКЦИИ</a>
+                    <div class="slide-text">
+                        <h1 class="slide-title">ДОМ ПАРФЮМЕРИИ</h1>
+                        <p class="slide-subtitle">"Место, где ароматы обретают голос"</p>
+                        <a href="#collections" class="cta-button">
+                            <span>ПОСМОТРЕТЬ КОЛЛЕКЦИИ</span>
+                            <div class="button-shine"></div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Второй слайд -->
         <div class="hero-slide">
             <div class="slide-image" style="background-image: url('images/slide2.jpg');"></div>
+            <div class="slide-overlay"></div>
             <div class="slide-content">
                 <div class="container">
-                    <h2 class="slide-title">ПОЛУЧИТЕ СКИДКУ 15%</h2>
-                    <p class="slide-subtitle">На первую покупку при подписке</p>
-                    <a href="#newsletter" class="cta-button">ПОЛУЧИТЬ СКИДКУ</a>
+                    <div class="slide-text">
+                        <h2 class="slide-title">ПОЛУЧИТЕ СКИДКУ</h2>
+                        <p class="slide-subtitle">10% на первую покупку при регистрации</p>
+                        <a href="auth/register.html" class="cta-button">
+                            <span>ПОЛУЧИТЬ СКИДКУ</span>
+                            <div class="button-shine"></div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Навигация слайдера -->
         <div class="slider-nav">
-            <button class="slider-prev" aria-label="Предыдущий"><i class="fas fa-chevron-left"></i></button>
+            <button class="nav-btn nav-prev" aria-label="Предыдущий слайд">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
             <div class="slider-dots">
                 <span class="dot active" data-slide="0"></span>
                 <span class="dot" data-slide="1"></span>
             </div>
-            <button class="slider-next" aria-label="Следующий"><i class="fas fa-chevron-right"></i></button>
+            <button class="nav-btn nav-next" aria-label="Следующий слайд">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
         </div>
     </section>
 
-    <!-- Секция "О нас" (аналог блока Moudon с текстом) -->
-    <section class="about-section">
+    <!-- О нас -->
+    <section class="about-section fade-in">
         <div class="container">
             <div class="about-content">
                 <div class="about-text">
-                    <h2>Дом Парфюмерии — место, где ароматы обретают голос</h2>
+                    <h2 class="fade-in">Дом Парфюмерии — место, где ароматы обретают голос</h2>
                     <div class="about-description">
                         <p>Некоторые из них — дерзкие и уверенные, с первых нот заявляющие о себе. Другие — нежные и застенчивые, раскрывающие свою душу лишь к середине дня.</p>
                         <p>Мы собрали эти многогранные характеры под одной крышей: от смелых европейских новичков до мудрых, сложных восточных шедевров. Каждый — оригинальная история в стекле, ожидающая своего часа.</p>
-                        <p class="highlight-text">Вслушаться в тишину ароматов</p>
+                        <p class="highlight-text">
+                            <a href="#collections" class="about-button">Вслушаться в тишину ароматов</a>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Коллекции (Our Collections) -->
-    <section class="collections-section" id="collections">
+    <!-- Наша коллекция -->
+    <section class="collections-section fade-in" id="collections">
         <div class="container">
-            <h2 class="section-title">Наша коллекция</h2>
+            <h2 class="section-title fade-in">Наша коллекция</h2>
             <div class="collections-grid">
-                <div class="collection-item">
+                <div class="collection-item fade-in">
                     <div class="collection-image" style="background-image: url('images/collection1.jpg');"></div>
                     <div class="collection-info">
                         <h3>Нишевая парфюмерия</h3>
-                        <a href="#" class="collection-link">→</a>
+                        <a href="catalog.html?filter=niche" class="collection-link" data-filter="niche">→</a>
                     </div>
                 </div>
-                <div class="collection-item">
+                <div class="collection-item fade-in">
                     <div class="collection-image" style="background-image: url('images/collection2.jpg');"></div>
                     <div class="collection-info">
                         <h3>Арабские духи</h3>
-                        <a href="#" class="collection-link">→</a>
+                        <a href="catalog.html?filter=arabic" class="collection-link" data-filter="arabic">→</a>
                     </div>
                 </div>
-                <div class="collection-item">
+                <div class="collection-item fade-in">
                     <div class="collection-image" style="background-image: url('images/collection3.jpg');"></div>
                     <div class="collection-info">
                         <h3>Масла</h3>
-                        <a href="#" class="collection-link">→</a>
+                        <a href="catalog.html?filter=oils" class="collection-link" data-filter="oils">→</a>
                     </div>
                 </div>
-                <div class="collection-item">
+                <div class="collection-item fade-in">
                     <div class="collection-image" style="background-image: url('images/collection4.jpg');"></div>
                     <div class="collection-info">
                         <h3>Аксессуары</h3>
-                        <a href="#" class="collection-link">→</a>
+                        <a href="catalog.html?filter=accessories" class="collection-link" data-filter="accessories">→</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Секция с историей (как у Moudon "Fragrances that inspire you") -->
-    <section class="story-section">
+    <!-- История -->
+    <section class="story-section fade-in">
         <div class="container">
             <div class="story-content">
                 <div class="story-text">
-                    <h2>Место, где ароматы обретают дом</h2>
+                    <h2 class="fade-in">Место, где ароматы обретают дом</h2>
                     <p>В самом сердце Ростова, среди шума рынка и городских проспектов, родился наш «Дом Парфюмерии». Мы верим, что настоящая роскошь — это не высокая цена, а свобода выбора.</p>
                     <p>С любовью и знанием дела мы собрали здесь ароматы со всего света, чтобы каждый мог открыть для себя целый мир — от смелых нишевых экспериментов до проверенной временем классики.</p>
                     <a href="about.html" class="story-button">УЗНАТЬ БОЛЬШЕ</a>
                 </div>
                 <div class="story-image">
-                    <!-- Замените на фото вашего магазина -->
-                    <img src="images/store-interior.jpg" alt="Интерьер магазина Дом Парфюмерии">
+                    <img src="images/store-interior.jpg" alt="Интерьер магазина Дом Парфюмерии" loading="lazy">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Подвал -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">
-                    <img src="images/logo-white.png" alt="Дом Парфюмерии" width="120">
-                </div>
-                <div class="footer-links">
-                    <div class="footer-column">
-                        <h4>Магазин</h4>
-                        <a href="#">Все духи</a>
-                        <a href="#">Новинки</a>
-                        <a href="#">Хиты продаж</a>
-                        <a href="#">Скидки</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Информация</h4>
-                        <a href="about.html">О нас</a>
-                        <a href="contacts.html">Контакты</a>
-                        <a href="#">Доставка и оплата</a>
-                        <a href="#">Гарантии</a>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Контакты</h4>
-                        <p>г. Ростов-на-Дону</p>
-                        <p>ул. Люльшенко, 19/4</p>
-                        <p>пр. Соколова, 52А</p>
-                        <p>+7 (999) 123-45-67</p>
-                    </div>
-                    <div class="footer-column">
-                        <h4>Подписка</h4>
-                        <p>Будьте в курсе новинок и акций</p>
-                        <form class="subscribe-form">
-                            <input type="email" placeholder="Ваш email" required>
-                            <button type="submit">ПОДПИСАТЬСЯ</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Дом Парфюмерии. Все права защищены.</p>
-                <p>ИП Додоев Дилшод Шухратович</p>
-            </div>
-        </div>
-    </footer>
+    <!-- Футер -->
+    <div id="footer-placeholder">Загрузка футера...</div>
 
-    <script src="js/main.js"></script>
+    <!-- Скрипты (defer для скорости) -->
+    <script src="js/main.js" defer></script>
+    <script src="js/include.js" defer></script>
 </body>
 </html>
